@@ -1,2 +1,3 @@
-# image-inpaiting-in-cpp
-A repository for creating an implementation of image inpainting using C++
+# Image inpainting implementation using C++
+
+A repository for creating an implementation of image inpainting using C++ 
