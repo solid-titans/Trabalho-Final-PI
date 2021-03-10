@@ -48,6 +48,8 @@ class Image {
         //Read a file an returns a bool, if it was a success
         bool read(std::string filename);
         //Writes a file with the name 'filename'
+        //OBS: the 'quality' variable is only used in writing .jpg images
+        //for specifing the compression ( 0 - 100 ) 
         bool write(std::string filename, int quality = 100);
 
         ImageType getFileType(std::string filename);

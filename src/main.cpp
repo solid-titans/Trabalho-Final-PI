@@ -7,7 +7,7 @@ int main() {
     Image* test = new Image("r35.jpeg");
     auto tmp = test->get_data();
 
-    for(int i =0; i < test->get_width(); i++) {
+    for(int i =test->get_width(); i < test->get_width()*2; i++) {
         tmp[i] = 0;
     }
 
