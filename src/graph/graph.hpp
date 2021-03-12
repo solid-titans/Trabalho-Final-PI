@@ -3,7 +3,7 @@
 
 #include <vector>
 #include "vertex.hpp"
-#include "matrix/matrix.cpp"
+#include "matrix_cpp/matrix.cpp"
 
 using edge_value = int32_t;
 using number_vertices = int32_t;
