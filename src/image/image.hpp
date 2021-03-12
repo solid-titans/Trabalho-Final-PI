@@ -57,12 +57,15 @@ class Image {
         //  Filters
         
         
-        /** Grayscale Lveraging
+        /** grayscale Averaging
          * The values of r + g + b will be changed after that divided by 3
          */
         Image& grayscale_avg();
         
-        // Grayscale Luminance
+
+        /** Grayscale Luminance
+         * Can best maintain the illumination of an image
+         */
         Image& grayscale_lum();
 };
 

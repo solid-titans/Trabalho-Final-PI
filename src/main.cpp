@@ -14,8 +14,10 @@ int main() {
     test->write("result.png");
 
     test->grayscale_avg();
-
     test->write("gray_avg.png");
+    
+    test->grayscale_lum();
+    test->write("gray_lum.png");
 
     return 0;
 }

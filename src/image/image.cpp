@@ -105,16 +105,29 @@
                 // (r+g+b)/3
                 int gray = (data[i]+ data[i+1]+ data[i+2])/3;
                 memset(data+i, gray, 3);
-                
+
                 }
             }
-
+            
+      return *this;
     }
         
        
     Image& Image::grayscale_lum(){
+        // if the image is already in grayscale
+            if(channels < 3 ){ 
+                std::cerr << "Image is already in grayscale"<< std::endl;;
 
-            
+            } else {
+                for (int i = 0; i < size; i+=channels) {
+               
+                int gray = (0.2126*data[i]+ 0.7152*data[i+1]+ 0.0722*data[i+2]);
+                memset(data+i, gray, 3);
+                
+                }
+            }
+               
+      return *this;
     }
 
     
