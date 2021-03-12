@@ -1,4 +1,5 @@
 #include"image.hpp"
+#include <cstring>
 #include<iostream>
 
     Image::Image(std::string filename) {
@@ -91,3 +92,29 @@
 
         return NOT_IDENTIFIED;
     }
+
+
+    Image& Image::grayscale_avg(){
+
+        // if the image is already in grayscale
+            if(channels < 3 ){ 
+                std::cerr << "Image is already in grayscale"<< std::endl;;
+
+            } else {
+                for (int i = 0; i < size; i+=channels) {
+                // (r+g+b)/3
+                int gray = (data[i]+ data[i+1]+ data[i+2])/3;
+                memset(data+i, gray, 3);
+                
+                }
+            }
+
+    }
+        
+       
+    Image& Image::grayscale_lum(){
+
+            
+    }
+
+    

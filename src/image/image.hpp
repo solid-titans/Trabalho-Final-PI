@@ -53,6 +53,17 @@ class Image {
         bool write(std::string filename, int quality = 100);
 
         ImageType getFileType(std::string filename);
+        
+        //  Filters
+        
+        
+        /** Grayscale Lveraging
+         * The values of r + g + b will be changed after that divided by 3
+         */
+        Image& grayscale_avg();
+        
+        // Grayscale Luminance
+        Image& grayscale_lum();
 };
 
 #endif
