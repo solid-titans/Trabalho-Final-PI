@@ -1,38 +1,41 @@
 #ifndef graph_hpp
 #define graph_hpp
 
+#define EMPTY -1
+
 #include <vector>
 #include "vertex.hpp"
 #include "matrix_cpp/matrix.cpp"
 
-using edge_value = int32_t;
-using number_vertices = int32_t;
-using number_edges = int32_t;
+using weight = int8_t;
+using counter= uint16_t;
 
 class Graph {
-    number_vertices count_vertices;
-    number_edges count_edges;
-    std::vector<vertex_value> all_vertices_values;
-    Matrix<edge_value> all_edges_values;
+
+    private: 
+        counter vertices;
+        counter edges;
+
+        Matrix<weight>* all_vertices;
+
+        bool has_space();
 
     public:
         
         //
-        Graph(number_vertices count_vertices, number_edges count_edges);
+        Graph();
+        Graph(counter vertices);
         
         //
-        void has_space(Vertex *vertx);
-        bool add_edge(Vertex *first, Vertex *last, int edge_value);
-        bool add_vertex(Vertex *vertx);
-        bool search_vertex(Vertex *vertx);
-        void print_vertices();
-        void print_edges();
+        bool add_edge(counter first, counter last, weight weight);
+        counter add_vertex(weight value);
+        bool search_vertex(counter id);
         
         //
-        short getVerticesNumber();  
-        short getEdgesNumber();
+        counter getVerticesNumber();  
+        counter getEdgesNumber();
         
-        virtual std::string print();  
+        virtual void print();  
 };
 
 #endif

@@ -6,95 +6,88 @@
 *  v0.1
 */
 
-    // Constructor 
-    Graph::Graph(number_vertices count_vertices,number_edges count_edges) {
-        this->count_vertices = count_vertices;
-        this->count_edges = count_edges;
+    // Start the graph with the 'min' size of Matrix
+    Graph::Graph() {
+        this->all_vertices = new Matrix<weight>();
+        this->all_vertices->fill(EMPTY);
+
+        this->vertices = 0;
+        this->edges    = 0;
+    }
+
+    // Start the graph with a set size
+    Graph::Graph(counter v) {
+        this->all_vertices = new Matrix<weight>(v);
+        this->all_vertices->fill(EMPTY);
+
+        this->vertices = 0;
+        this->edges    = 0;
     } 
 
-    // Add a new Vertex to the graph and return if its successfully
-    bool Graph::add_vertex(Vertex *vertx) {
-        bool vertex_addition = true;
-
-        for(auto i : this->all_vertices_values) {
-            if(i == vertx->get_vertex_value()) {
-                vertex_addition = false;
-                std::cout << "An error has occured: The vertex already exist in the graph!";
-                break;
-            } 
-        }  
-        
-        if(vertex_addition)
-        {
-            this->all_vertices_values.push_back(vertx->get_vertex_value());
-        }
-        
-        return vertex_addition;
-    }
-
-    // Checks if the vertx is already in the matrix, if it is not expand the matrix
-    void Graph::has_space(Vertex *vertx){
-
-        if(!search_vertex(vertx)) {
-            vertx->set_vertex_tag(all_vertices_values.size() + 1);
-            all_edges_values.expand_matrix(vertx->get_vertex_tag());
-        }
-
-    }
-
-    // Add a new Edge to the graph and return if its successfully
-    bool Graph::add_edge(Vertex *first, Vertex *last, int value) {
-        bool edge_addition;
-
-        has_space(first);
-        has_space(last);
-
-        edge_addition = all_edges_values.insert(value,first->get_vertex_tag(),last->get_vertex_tag());
-
-        return edge_addition;
-    }
-
-    // Checks if the vertex exist
-    bool Graph::search_vertex(Vertex *vertx) {
-        bool resp = false;
-
-        if(vertx->get_vertex_tag() != -1 && vertx->get_vertex_tag() < all_vertices_values.size()) 
-            resp = true;
-          
-        return resp;
-    }
-
-    // Print all the vertices values
-    void Graph::print_vertices() {
-
-        std::cout << "Vertices_Values = [ ";
-
-        for(auto i : this->all_vertices_values) {
-            std::cout << i << "";
-        }
-
-        std::cout << "]";
-
-    }
-
-    // Print all the edges values
-    void Graph::print_edges() {
-        
-        std::cout << "Edges_Values = [ ";
-
-        //Implementation in progress...
-
-        std::cout << "]";
-
-
-    }
-
     //Return the number of vertices the graph has
-    short Graph::getVerticesNumber() {
-        return this->count_vertices;
+    counter Graph::getVerticesNumber() {
+        return this->vertices;
     }
 
     //Return the number of edges the graph has
-    short Graph::getEdgesNumber() {
-        return this->count_edges;
+    counter Graph::getEdgesNumber() {
+        return this->edges;
+    }
+
+    // Add a new Vertex to the graph and return its id if it is successful
+    counter Graph::add_vertex(weight value) {
+        counter result = -1;
+        counter pos    = this->vertices;
+
+        has_space();
+
+        this->all_vertices->insert(value,pos,pos);
+        result = this->vertices;
+        this->vertices++;
+        
+        return result;
+    }
+
+    // Checks if the matrix have space, if does not, expand the matrix
+    bool Graph::has_space(){
+        bool result = false;
+
+        if(this->vertices == this->all_vertices->get_number_of_columns()) {
+            this->all_vertices->expand_matrix(1);
+            result = true;
+        }
+
+        return result;
+    }
+
+    // Add a new Edge to the graph and return if its successfully
+    bool Graph::add_edge(counter first, counter last, weight value) {
+        bool result = false;
+
+        if(search_vertex(first) || search_vertex(last)) {
+            this->all_vertices->insert(value,first,last);
+            this->all_vertices->insert(value,last,first);
+            result = true;
+            this->edges++;
+        }
+
+        return result;
+    }
+
+    // Checks if the vertex exist
+    bool Graph::search_vertex(counter id) {
+        bool resp = false;
+
+        if (id < this->all_vertices->get_number_of_columns() && id >= 0) 
+            resp = true;
+        
+        return resp;
+    }
+
+    void Graph::print() {
+
+        std::cout << "Number of vertices: " << this->vertices;
+        std::cout << "Number of edges   : " << this->edges; 
+
+        this->all_vertices->print(); 
     }
