@@ -4,7 +4,7 @@
 
 int main() {
     
-    Image* test = new Image("r35.jpeg");
+    Image* test = new Image("tabela.png");
     auto tmp = test->get_data();
 
     for(int i =test->get_width(); i < test->get_width()*2; i++) {
