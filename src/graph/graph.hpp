@@ -4,11 +4,10 @@
 #define EMPTY -1
 
 #include <vector>
-#include "vertex.hpp"
 #include "matrix_cpp/matrix.cpp"
 
-using weight = int8_t;
-using counter= uint16_t;
+using weight  = int8_t;
+using counter = uint16_t;
 
 class Graph {
 
@@ -17,6 +16,7 @@ class Graph {
         counter edges;
 
         Matrix<weight>* all_vertices;
+        std::vector<counter>* adj;
 
         bool has_space();
 
@@ -25,6 +25,7 @@ class Graph {
         //
         Graph();
         Graph(counter vertices);
+        ~Graph();
         
         //
         bool add_edge(counter first, counter last, weight weight);

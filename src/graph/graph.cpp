@@ -24,6 +24,11 @@
         this->edges    = 0;
     } 
 
+    Graph::~Graph() {
+        free(this->all_vertices);
+        free(this->adj);
+    }
+
     //Return the number of vertices the graph has
     counter Graph::getVerticesNumber() {
         return this->vertices;
@@ -64,7 +69,7 @@
     bool Graph::add_edge(counter first, counter last, weight value) {
         bool result = false;
 
-        if(search_vertex(first) || search_vertex(last)) {
+        if(search_vertex(first) && search_vertex(last)) {
             this->all_vertices->insert(value,first,last);
             this->all_vertices->insert(value,last,first);
             result = true;
