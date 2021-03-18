@@ -1,6 +1,6 @@
 #include "graph.hpp"
-#include<string>
 #include<iostream>
+#include <bits/stdc++.h>
 /*
 * Implementing the graph class
 *  v0.1
@@ -8,25 +8,28 @@
 
     // Start the graph with the 'min' size of Matrix
     Graph::Graph() {
-        this->all_vertices = new Matrix<weight>();
-        this->all_vertices->fill(EMPTY);
+
+        //Starting the matrix with EMPTY value
+        weight default_value = EMPTY;
+        this->graph          = new Matrix<weight>(default_value);
 
         this->vertices = 0;
         this->edges    = 0;
     }
 
-    // Start the graph with a set size
+    // Start the graph matrix with a set size
     Graph::Graph(counter v) {
-        this->all_vertices = new Matrix<weight>(v);
-        this->all_vertices->fill(EMPTY);
 
+        //Starting the matrix with EMPTY value
+        weight default_value = EMPTY;
+        this->graph          = new Matrix<weight>(default_value);
+        
         this->vertices = 0;
         this->edges    = 0;
     } 
 
     Graph::~Graph() {
-        free(this->all_vertices);
-        free(this->adj);
+        free(this->graph);
     }
 
     //Return the number of vertices the graph has
@@ -46,19 +49,22 @@
 
         has_space();
 
-        this->all_vertices->insert(value,pos,pos);
+        this->graph->insert(value,pos,pos);
         result = this->vertices;
         this->vertices++;
+
+        std::vector<counter> it;
+        this->adj.push_back(it);
         
         return result;
     }
 
-    // Checks if the matrix have space, if does not, expand the matrix
+    // Checks if the graph matrix have space, if does not, expand the matrix
     bool Graph::has_space(){
         bool result = false;
 
-        if(this->vertices == this->all_vertices->get_number_of_columns()) {
-            this->all_vertices->expand_matrix(1);
+        if(this->vertices == this->graph->get_number_of_columns()) {
+            this->graph->expand_matrix(1,EMPTY);
             result = true;
         }
 
@@ -70,10 +76,13 @@
         bool result = false;
 
         if(search_vertex(first) && search_vertex(last)) {
-            this->all_vertices->insert(value,first,last);
-            this->all_vertices->insert(value,last,first);
+            this->graph->insert(value,first,last);
+            this->graph->insert(value,last,first);
             result = true;
             this->edges++;
+
+            add_adj(first, last);
+            add_adj(last, first);
         }
 
         return result;
@@ -83,16 +92,36 @@
     bool Graph::search_vertex(counter id) {
         bool resp = false;
 
-        if (id < this->all_vertices->get_number_of_columns() && id >= 0) 
+        if (this->graph->get(id,id) != EMPTY) 
             resp = true;
         
         return resp;
     }
 
+    void Graph::add_adj(counter first, counter last) {
+        auto it = this->adj.at(first);
+        it.push_back(last);
+
+        std::replace(this->adj.begin(), this->adj.end(), this->adj.at(first), it);
+    }
+
     void Graph::print() {
 
-        std::cout << "Number of vertices: " << this->vertices;
-        std::cout << "Number of edges   : " << this->edges; 
+        std::cout << "Number of vertices: " << this->vertices << std::endl;
+        std::cout << "Number of edges   : " << this->edges << std::endl; 
 
-        this->all_vertices->print(); 
+        std::cout << "\nAdj:\n"; 
+
+        for(int i = 0; i < adj.size(); i++) {
+            std::vector<counter> it = this->adj.at(i);
+            std::vector<counter> :: iterator v;
+            std::cout << "v[" << i << "] :"; 
+            for(v = it.begin(); v != it.end() ;++v) {
+                std::cout << ' ' << *v; 
+            }
+            std::cout << '\n'; 
+        }
+        std::cout << '\n'; 
+
+        this->graph->print(); 
     }

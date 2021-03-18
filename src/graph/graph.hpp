@@ -6,7 +6,7 @@
 #include <vector>
 #include "matrix_cpp/matrix.cpp"
 
-using weight  = int8_t;
+using weight  = int;
 using counter = uint16_t;
 
 class Graph {
@@ -15,8 +15,8 @@ class Graph {
         counter vertices;
         counter edges;
 
-        Matrix<weight>* all_vertices;
-        std::vector<counter>* adj;
+        Matrix<weight>*       graph;
+        std::vector<std::vector<counter>> adj;
 
         bool has_space();
 
@@ -28,9 +28,10 @@ class Graph {
         ~Graph();
         
         //
-        bool add_edge(counter first, counter last, weight weight);
+        bool    add_edge(counter first, counter last, weight weight);
         counter add_vertex(weight value);
-        bool search_vertex(counter id);
+        bool    search_vertex(counter id);
+        void    add_adj(counter first,counter last);
         
         //
         counter getVerticesNumber();  
