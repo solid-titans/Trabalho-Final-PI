@@ -45,8 +45,10 @@ class Image {
         int get_width();
         int get_height();
         img* get_data();
+
         //Read a file an returns a bool, if it was a success
         bool read(std::string filename);
+
         //Writes a file with the name 'filename'
         //OBS: the 'quality' variable is only used in writing .jpg images
         //for specifing the compression ( 0 - 100 ) 
@@ -55,7 +57,6 @@ class Image {
         ImageType getFileType(std::string filename);
         
         //  Filters
-        
         
         /** grayscale Averaging
          * The values of r + g + b will be changed after that divided by 3
@@ -67,6 +68,20 @@ class Image {
          * Can best maintain the illumination of an image
          */
         Image& grayscale_lum();
+
+        /** Color mask
+         * Activate/deactive certain color channels of an image
+         */
+        Image& colorMask(float r, float g, float b);
+
+        //Basic convulutions effect
+
+        //Apply a convulution to the center
+        Image& std_convolve_clamp_to_0(img channel, uint32_t ker_w, uint32_t ker_h, double* ker, uint32_t cr, uint32_t cc);
+        //Apply a convulution to the border
+        Image& std_convolve_clamp_to_border(img channel, uint32_t ker_w, uint32_t ker_h, double* ker, uint32_t cr, uint32_t cc);
+        //Apply convulution in a cyclic manner
+        Image& std_convolve_cyclic(img channel, uint32_t ker_w, uint32_t ker_h, double* ker, uint32_t cr, uint32_t cc);
 };
 
 #endif

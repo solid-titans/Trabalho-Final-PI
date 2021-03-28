@@ -1,22 +1,20 @@
 #include<string>
 #include<iostream>
 #include"graph/graph.cpp"
+#include"image/image.cpp"
 int main() {
 
-    Image* test = new Image("sample.png");
-    auto tmp = test->get_data();
+    Image* test = new Image("thumb.png");
 
-    for(int i =test->get_width(); i < test->get_width()*2; i++) {
-        tmp[i] = 0;
-    }
+    double ker[] = { 1/16.0, 2/16.0, 1/16.0,
+                     2/16.0, 4/16.0, 2/16.0,
+                     1/16.0, 2/16.0, 1/16.0};
 
-    test->write("result.png");
+    test->std_convolve_cyclic(0,3,3,ker,1,1);
+    test->std_convolve_cyclic(1,3,3,ker,1,1);
+    test->std_convolve_cyclic(2,3,3,ker,1,1);
 
-    test->grayscale_avg();
-    test->write("gray_avg.png");
+    test->write("blurred.jpg");
     
-    test->grayscale_lum();
-    test->write("gray_lum.png");
-
     return 0;
 }

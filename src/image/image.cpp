@@ -2,6 +2,8 @@
 #include <cstring>
 #include<iostream>
 
+#define BYTE_BOUND(value) value < 0 ? 0 : (value > 255 ? 255 : value)
+
     Image::Image(std::string filename) {
         if(read(filename)) {
             std::cout << "Read " << filename << std::endl;
@@ -98,7 +100,7 @@
 
         // if the image is already in grayscale
             if(channels < 3 ){ 
-                std::cerr << "Image is already in grayscale"<< std::endl;;
+                std::cerr << "Image is already in grayscale"<< std::endl;
 
             } else {
                 for (int i = 0; i < size; i+=channels) {
@@ -128,6 +130,115 @@
             }
                
       return *this;
+    }
+
+    Image& Image::colorMask(float r, float g, float b) {
+        if(channels <3) {
+            std::cerr << "\e[31[ERROR] Color mask requires at least 3 channels,\n but this image has "<< channels << " channels\e[0m\n"<< std::endl;
+
+        }
+        else {
+            for(int i =0; i < size; i+=channels) {
+                data[i]   *= r;
+                data[i+1] *= g;
+                data[i+2] *= b;
+            }
+        }
+
+        return *this;
+    }
+
+    Image& Image::std_convolve_clamp_to_0(img channel, uint32_t ker_w, uint32_t ker_h, double ker[], uint32_t cr, uint32_t cc) {
+        img new_data[width*height];
+        uint64_t center = cr*ker_w + cc;
+
+        for(uint64_t k =channel; k<size; k+=this->channels) {
+            double c = 0;
+            for(long i = -((long)cr); i <(long)ker_h -cr; i++) {
+                long row = ((long)k/this->channels)/width-i;
+                if(row < 0 || row > height-1) 
+                    continue;
+                
+                for(long j = -((long)cc);j <(long)ker_w -cc; j++) {
+                    long column = ((long)k/this->channels)%width-j;
+                    if(column < 0 || column > width-1) 
+                        continue;
+                    
+                    c+= ker[center+i*(long)ker_w+j]*data[(row*width+column)*this->channels+this->channels];
+                }
+            }
+            new_data[k/this->channels] = (img)BYTE_BOUND(round(c));
+        }
+        for(uint64_t k = channel; k < size; k+=this->channels) {
+            data[k] = new_data[k/this->channels];
+        }
+        return *this;
+    }
+
+    Image& Image::std_convolve_clamp_to_border(img channel, uint32_t ker_w, uint32_t ker_h, double ker[], uint32_t cr, uint32_t cc) {
+        img new_data[width*height];
+        uint64_t center = cr*ker_w + cc;
+
+        for(uint64_t k =channel; k<size; k+=this->channels) {
+            double c = 0;
+            for(long i = -((long)cr); i <(long)ker_h -cr; i++) {
+                long row = ((long)k/this->channels)/width-i;
+
+                if(row < 0 ) 
+                    row = 0;
+                else if (row > height-1) 
+                    row = height-1;
+
+                for(long j = -((long)cc);j <(long)ker_w -cc; j++) {
+                    long column = ((long)k/this->channels)%width-j;
+
+                    if(column < 0)
+                        column = 0;
+                    else if(column > width-1)
+                        column = width-1;
+                    
+                    c+= ker[center+i*(long)ker_w+j]*data[(row*width+column)*this->channels+this->channels];
+                }
+            }
+            new_data[k/this->channels] = (img)BYTE_BOUND(round(c));
+        }
+        for(uint64_t k = channel; k < size; k+=this->channels) {
+            data[k] = new_data[k/this->channels];
+        }
+        return *this;
+    }
+
+    Image& Image::std_convolve_cyclic(img channel, uint32_t ker_w, uint32_t ker_h, double ker[], uint32_t cr, uint32_t cc) {
+        img new_data[width*height];
+        uint64_t center = cr*ker_w + cc;
+
+        for(uint64_t k =channel; k<size; k+=this->channels) {
+            double c = 0;
+            for(long i = -((long)cr); i <(long)ker_h -cr; i++) {
+                long row = ((long)k/this->channels)/width-i;
+
+                if(row < 0 ) 
+                    row = row%height + height;
+                else if (row > height-1) 
+                    row %= height;
+
+                for(long j = -((long)cc);j <(long)ker_w -cc; j++) {
+                    long column = ((long)k/this->channels)%width-j;
+
+                    if(column < 0)
+                        column = column%width + width;
+                    else if(column > width-1)
+                        column %= width;
+                    
+                    c+= ker[center+i*(long)ker_w+j]*data[(row*width+column)*this->channels+this->channels];
+                }
+            }
+            new_data[k/this->channels] = (img)BYTE_BOUND(round(c));
+        }
+        for(uint64_t k = channel; k < size; k+=this->channels) {
+            data[k] = new_data[k/this->channels];
+        }
+        return *this;
     }
 
     

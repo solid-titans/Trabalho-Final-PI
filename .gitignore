@@ -33,3 +33,10 @@
 
 # Ignore vscode configurations
 **/.vscode/
+
+# Ignore image formats
+*.png
+*.jpg
+*.bmp
+*.tga
+
