@@ -1,9 +1,8 @@
 #include<string>
 #include<iostream>
-#include"image/image.cpp"
-
+#include"graph/graph.cpp"
 int main() {
-    
+
     Image* test = new Image("sample.png");
     auto tmp = test->get_data();
 
