@@ -95,6 +95,15 @@
         return NOT_IDENTIFIED;
     }
 
+    Image& Image::threshold(img threshold) {
+        for (int32_t i = 0; i < size; i+=channels) {
+            int32_t pixel = (data[i]+ data[i+1]+ data[i+2])/3;
+            memset(data+i, pixel > threshold ? MIN : MAX, 3);
+        }
+
+        return  *this;
+    }
+
 
     Image& Image::grayscale_avg(){
 
@@ -103,9 +112,9 @@
                 std::cerr << "Image is already in grayscale"<< std::endl;
 
             } else {
-                for (int i = 0; i < size; i+=channels) {
+                for (int32_t i = 0; i < size; i+=channels) {
                 // (r+g+b)/3
-                int gray = (data[i]+ data[i+1]+ data[i+2])/3;
+                int32_t gray = (data[i]+ data[i+1]+ data[i+2])/3;
                 memset(data+i, gray, 3);
 
                 }
@@ -121,9 +130,9 @@
                 std::cerr << "Image is already in grayscale"<< std::endl;;
 
             } else {
-                for (int i = 0; i < size; i+=channels) {
+                for (int32_t i = 0; i < size; i+=channels) {
                
-                int gray = (0.2126*data[i]+ 0.7152*data[i+1]+ 0.0722*data[i+2]);
+                int32_t gray = (0.2126*data[i]+ 0.7152*data[i+1]+ 0.0722*data[i+2]);
                 memset(data+i, gray, 3);
                 
                 }
@@ -138,7 +147,7 @@
 
         }
         else {
-            for(int i =0; i < size; i+=channels) {
+            for(int32_t i =0; i < size; i+=channels) {
                 data[i]   *= r;
                 data[i+1] *= g;
                 data[i+2] *= b;

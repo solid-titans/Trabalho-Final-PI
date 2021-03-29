@@ -14,6 +14,9 @@
 
 using img=uint8_t;
 
+#define MIN 0
+#define MAX 255
+
 enum ImageType {
     PNG, 
     JPG,
@@ -57,6 +60,8 @@ class Image {
         ImageType getFileType(std::string filename);
         
         //  Filters
+
+        Image& threshold(img threshold);
         
         /** grayscale Averaging
          * The values of r + g + b will be changed after that divided by 3
