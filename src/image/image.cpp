@@ -98,7 +98,7 @@
     Image& Image::threshold(img threshold) {
         for (int32_t i = 0; i < size; i+=channels) {
             int32_t pixel = (data[i]+ data[i+1]+ data[i+2])/3;
-            memset(data+i, pixel > threshold ? MIN : MAX, 3);
+            memset(data+i, pixel < threshold ? MIN : MAX, 3);
         }
 
         return  *this;
@@ -139,6 +139,22 @@
             }
                
       return *this;
+    }
+
+    Image& Image::diffmap(Image& img) {
+        int32_t compare_width    = fmin(this->width,img.width);
+        int32_t compare_height   = fmin(this->height,img.height);
+        int32_t compare_channels = fmin(this->channels,img.channels);
+
+        for(uint32_t i=0; i<compare_height; i++) {
+            for(uint32_t j=0; j<compare_width;j++) {
+                for(uint8_t k=0; k<compare_channels;k++) {
+                    data[(i*width+j)*channels+k] = BYTE_BOUND(abs(data[(i*width+j)*channels+k] - img.data[(i*img.width+j)*img.channels+k]));
+                }
+            }
+        }
+
+        return *this;
     }
 
     Image& Image::colorMask(float r, float g, float b) {

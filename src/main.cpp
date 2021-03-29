@@ -4,9 +4,9 @@
 #include"image/image.cpp"
 int main() {
 
-    Image* test = new Image("thumb.png");
+    Image* test = new Image("teste.png");
 
-    test->threshold(70);
+    test->threshold(122);
 
     test->write("blurred.jpg");
     

@@ -61,6 +61,9 @@ class Image {
         
         //  Filters
 
+        /** Turn a image into a binary format
+         *  
+         */
         Image& threshold(img threshold);
         
         /** grayscale Averaging
@@ -79,7 +82,9 @@ class Image {
          */
         Image& colorMask(float r, float g, float b);
 
-        //Basic convulutions effect
+        Image& diffmap(Image& img);
+
+        //Basic convulution effects
 
         //Apply a convulution to the center
         Image& std_convolve_clamp_to_0(img channel, uint32_t ker_w, uint32_t ker_h, double* ker, uint32_t cr, uint32_t cc);
