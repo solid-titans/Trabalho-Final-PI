@@ -65,6 +65,11 @@ class Image {
          *  
          */
         Image& threshold(img threshold);
+
+        /** Turn a image into a binary format
+         *  
+         */
+        Image& invert();
         
         /** grayscale Averaging
          * The values of r + g + b will be changed after that divided by 3

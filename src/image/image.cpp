@@ -104,6 +104,20 @@
         return  *this;
     }
 
+    Image& Image::invert() {
+        for (int32_t i = 0; i < size; i+=channels) {
+            img red   = data[i];
+            img green = data[i+1];
+            img blue  = data[i+2];
+
+            data[i]   = MAX - (green + blue)/2;
+            data[i+1] = MAX - (red + blue)/2;
+            data[i+2] = MAX - (red + green)/2;
+        }
+
+        return  *this;
+    }
+
 
     Image& Image::grayscale_avg(){
 
