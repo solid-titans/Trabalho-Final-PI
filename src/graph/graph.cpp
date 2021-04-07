@@ -33,23 +33,23 @@
     }
 
     //Return the number of vertices the graph has
-    counter Graph::getVerticesNumber() {
+    counter Graph::vertices_num() {
         return this->vertices;
     }
 
     //Return the number of edges the graph has
-    counter Graph::getEdgesNumber() {
+    counter Graph::edges_num() {
         return this->edges;
     }
 
     // Add a new Vertex to the graph and return its id if it is successful
-    counter Graph::add_vertex(weight value) {
+    counter Graph::add_vertex() {
         counter result = -1;
         counter pos    = this->vertices;
 
         has_space();
 
-        this->graph->insert(value,pos,pos);
+        this->graph->insert(pos,pos,pos);
         result = this->vertices;
         this->vertices++;
 
@@ -71,7 +71,7 @@
         return result;
     }
 
-    // Add a new Edge to the graph and return if its successfully
+    // Add a new Edge to the graph and return if the operation was a success
     bool Graph::add_edge(counter first, counter last, weight value) {
         bool result = false;
 

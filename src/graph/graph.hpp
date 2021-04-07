@@ -28,14 +28,14 @@ class Graph {
         ~Graph();
         
         //
-        bool    add_edge(counter first, counter last, weight weight);
-        counter add_vertex(weight value);
+        bool    add_edge(counter first, counter last, weight weight = 0);
+        counter add_vertex();
         bool    search_vertex(counter id);
         void    add_adj(counter first,counter last);
         
         //
-        counter getVerticesNumber();  
-        counter getEdgesNumber();
+        counter vertices_num();  
+        counter edges_num();
         
         virtual void print();  
 };
