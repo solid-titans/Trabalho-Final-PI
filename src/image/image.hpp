@@ -38,9 +38,11 @@ class Image {
 
         //Constructor 1: Reads a file from a path
         Image(std::string filename);
-        //Constructor 2: Create an image based on the width, height, and number of channels
+        //Constructor 2: Reads a file from a path(the filename is a const char*)
+        Image(const char *filename);
+        //Constructor 3: Create an image based on the width, height, and number of channels
         Image(int width, int height, int channels);
-        //Constructor 3: Create an image with another image
+        //Constructor 4: Create an image with another image
         Image(const Image& img);
         //Deconstructor: Release memory (free)
         ~Image();
@@ -52,6 +54,9 @@ class Image {
         //Read a file an returns a bool, if it was a success
         bool read(std::string filename);
 
+        //Read a file an returns a bool, if it was a success
+        bool read(const char *filename);
+
         //Writes a file with the name 'filename'
         //OBS: the 'quality' variable is only used in writing .jpg images
         //for specifing the compression ( 0 - 100 ) 
@@ -61,10 +66,12 @@ class Image {
         
         //  Filters
 
-        /** Turn a image into a binary format
+        /**  
+         * Apply a grayscale threshold
+         * Turn a image into a binary format(find the min and max)
          *  
          */
-        Image& threshold(img threshold);
+        Image& threshold_grayscale(img threshold);
 
         /** Turn a image into a binary format
          *  

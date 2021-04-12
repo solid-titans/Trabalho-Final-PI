@@ -13,6 +13,15 @@
         }
     }
 
+    Image::Image(const char *filename) {
+        if(read(filename)) {
+            std::cout << "Read " << filename << std::endl;
+            size = this->width*this->height*this->channels;
+        } else { 
+            std::cout << "Failed to read " << filename << std::endl;
+        }
+    }
+
     Image::Image(int w, int h, int c) : width(w), height(h), channels(c) {
         size = width*height*channels;
         data = new img[size];
@@ -43,6 +52,13 @@
         auto cstr = filename.c_str(); // convert std::string into a const char*
 
         data = stbi_load(cstr, &width, &height, &channels, 0);
+
+        return data != NULL;
+    }
+
+    bool Image::read(const char *filename) {
+
+        data = stbi_load(filename, &width, &height, &channels, 0);
 
         return data != NULL;
     }
@@ -95,7 +111,7 @@
         return NOT_IDENTIFIED;
     }
 
-    Image& Image::threshold(img threshold) {
+    Image& Image::threshold_grayscale(img threshold) {
         for (int32_t i = 0; i < size; i+=channels) {
             int32_t pixel = (data[i]+ data[i+1]+ data[i+2])/3;
             memset(data+i, pixel < threshold ? MIN : MAX, 3);
