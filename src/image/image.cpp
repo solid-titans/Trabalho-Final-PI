@@ -35,6 +35,10 @@
         stbi_image_free(data);
     }
 
+    int64_t Image::get_curr_pixel(int64_t index) {
+        return data[index]+ data[index+1]+ data[index+2];
+    }
+
     int Image::get_height() {
         return this->height * this->channels;
     }
@@ -293,6 +297,56 @@
         for(uint64_t k = channel; k < size; k+=this->channels) {
             data[k] = new_data[k/this->channels];
         }
+        return *this;
+    }
+
+    Image& Image::erosion(uint8_t force) {
+
+        for(uint8_t i = 0 ; i < force; i++) {
+            img new_data[width*height*channels];
+
+            for (int32_t i = 0; i < size; i+=channels) {
+                if(get_curr_pixel(i) == MIN || 
+                get_curr_pixel(i+1) == MIN || 
+                get_curr_pixel(i-1) == MIN ||
+                get_curr_pixel(i+width*channels) == MIN || 
+                get_curr_pixel((i+1)+width*channels) == MIN ||
+                get_curr_pixel((i-1)+width*channels) == MIN ||
+                get_curr_pixel(i-width*channels) == MIN || 
+                get_curr_pixel((i+1)-width*channels) == MIN ||
+                get_curr_pixel((i-1)-width*channels) == MIN ) {
+                    memset(new_data+i, MIN, 3);
+                }
+                else {
+                    memset(new_data+i, MAX, 3);
+                }
+            }
+            for (int32_t i = 0; i < size; i+=channels) {
+            // (r+g+b)/3
+                int32_t gray = (new_data[i]+ new_data[i+1]+ new_data[i+2])/3;
+                memset(data+i, gray, 3);
+
+        }
+        }
+        
+        return *this;
+    }
+
+    Image& Image::dilation(uint8_t force) {
+
+        for (int32_t i = width*channels+channels+1; i < (size - width*channels)+channels+-1; i+=channels) {
+            if(get_curr_pixel(i)/3 == MAX ){
+                memset(data+i, MAX, 3);
+                memset(data-i, MAX, 3);
+                memset(data+(i)+width*channels,MAX,3);
+                memset(data+(i+1)+width*channels,MAX,3);
+                memset(data+(i-1)+width*channels,MAX,3);
+                memset(data+(i)-width*channels,MAX,3);
+                memset(data+(i+1)-width*channels,MAX,3);
+                memset(data+(i-1)-width*channels,MAX,3);
+            }
+        }
+        
         return *this;
     }
 

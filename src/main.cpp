@@ -12,7 +12,7 @@ void image(int argc, char* argv[]);
 int main(int argc, char *argv[]) {
 
     if(argc < 3) {
-        std::cerr << "[ERROR]: Not enough paramaters!\n Input example: .\\a.out grayscale.png 123"<< std::endl;
+        std::cerr << "[ERROR]: Not enough paramaters!\n Input example: .\\a.out image grayscale.png 123"<< std::endl;
         return 0;
     }
 
@@ -55,6 +55,12 @@ void image(int argc, char* argv[]) {
                 break;
             case 5: 
                 test->grayscale_lum();
+                break;
+            case 6:
+                test->erosion(1);
+                break;
+            case 7:
+                test->dilation(1);
                 break;
             default:  
                 std::cerr << "[ERROR]: Not defined operation"<< std::endl;

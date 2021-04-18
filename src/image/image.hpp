@@ -34,6 +34,8 @@ class Image {
         int height;
         int channels; //how many colours values per pixel; 3 = RGB , 4 = RGBA
 
+        int64_t get_curr_pixel(int64_t index);
+
     public: 
 
         //Constructor 1: Reads a file from a path
@@ -104,6 +106,10 @@ class Image {
         Image& std_convolve_clamp_to_border(img channel, uint32_t ker_w, uint32_t ker_h, double* ker, uint32_t cr, uint32_t cc);
         //Apply convulution in a cyclic manner
         Image& std_convolve_cyclic(img channel, uint32_t ker_w, uint32_t ker_h, double* ker, uint32_t cr, uint32_t cc);
+        //Apply a erosion to an image
+        Image &erosion(uint8_t force);
+        //Apply a dilation to an image
+        Image &dilation(uint8_t force);
 };
 
 #endif
