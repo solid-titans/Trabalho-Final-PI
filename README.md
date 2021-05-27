@@ -1,3 +1,2 @@
-# Image inpainting implementation using C++
+# Algorithm for image manipulation using C++
 
-A repository for creating an implementation of image inpainting using C++ 
