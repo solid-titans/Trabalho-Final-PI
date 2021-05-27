@@ -1,41 +1,30 @@
 #include<string>
 #include<string.h>
 #include<iostream>
-#include"graph/graph.cpp"
-#include"image/image.cpp"
+#include"image.cpp"
 
 img THRESHOLD_VALUE = 122;
 
-void graph(int argc, char* argv[]);
 void image(int argc, char* argv[]);
 
 int main(int argc, char *argv[]) {
 
     if(argc < 3) {
-        std::cerr << "[ERROR]: Not enough paramaters!\n Input example: .\\a.out image grayscale.png 123"<< std::endl;
+        std::cerr << "[ERROR]: Not enough paramaters!\n Input example: .\\a.out grayscale.png 123"<< std::endl;
         return 0;
     }
 
-    if(strcmp(argv[1],"graph") == 0) 
-        graph(argc,argv);
-    else if(strcmp(argv[1],"image") == 0) 
-        image(argc,argv);
-    else 
-        std::cerr << "[ERROR]: First command not defined"<< std::endl;
+    image(argc,argv);
     
     return 0;
 }
 
-void graph(int argc, char* argv[]) {
-
-}
-
 void image(int argc, char* argv[]) {
 
-    Image* test = new Image(argv[2]);
+    Image* test = new Image(argv[1]);
 
-    for (int i = 0 ; i < strlen(argv[3]); i++) {
-        int operation = argv[3][i] - 48;
+    for (int i = 0 ; i < strlen(argv[2]); i++) {
+        int operation = argv[2][i] - 48;
         
         switch(operation) {
             case 0:

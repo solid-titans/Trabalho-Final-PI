@@ -1,4 +1,4 @@
-#include"image.hpp"
+#include"stb/image.hpp"
 #include <cstring>
 #include<iostream>
 
