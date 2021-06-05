@@ -51,6 +51,14 @@ void image(int argc, char* argv[]) {
             case 7:
                 test->dilation(1);
                 break;
+            case 8:
+            {
+                char buffer[4107] = {0};
+                size_t len = 0;
+                test->decodeMessage(buffer, &len);
+                std::cout << "Message : " << buffer << std::endl;
+            }
+                break;
             default:  
                 std::cerr << "[ERROR]: Not defined operation"<< std::endl;
                 break;

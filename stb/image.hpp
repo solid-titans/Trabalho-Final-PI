@@ -110,6 +110,12 @@ class Image {
         Image &erosion(uint8_t force);
         //Apply a dilation to an image
         Image &dilation(uint8_t force);
+
+        // Steganography 
+
+        Image& encodeMessage(const char* message);
+
+        Image& decodeMessage(char* buffer, size_t* messageLength);
 };
 
 #endif

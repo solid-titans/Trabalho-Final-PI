@@ -2,6 +2,8 @@
 #include <cstring>
 #include<iostream>
 
+#define STEG_HEADER_SIZE sizeof(uint32_t) * 8
+
 #define BYTE_BOUND(value) value < 0 ? 0 : (value > 255 ? 255 : value)
 
     Image::Image(std::string filename) {
@@ -350,4 +352,41 @@
         return *this;
     }
 
+    Image& Image::encodeMessage(const char* message) {
+        uint32_t len = strlen(message) * 8;
+
+        if(len + STEG_HEADER_SIZE > size) { 
+            std::cerr << "[ERROR]: This message is too large"<< std::endl;
+            return *this;
+        }
+
+        for(uint8_t i = 0 ; i < STEG_HEADER_SIZE; i++) {
+            data[i] &= 0xFE;
+            data[i] |= ( len >> (STEG_HEADER_SIZE - 1 - i )) & 1UL;
+        }
+
+        for(uint32_t i = 0; i < len; i++) {
+            data[i+STEG_HEADER_SIZE] &= 0xFE;
+            data[i+STEG_HEADER_SIZE] = message[i/8] >> ((len-1-i)%8) & 1;
+
+        }
+
+        return *this;
+    }
+
+    Image& Image::decodeMessage(char* buffer, size_t* messageLength) {
+        uint32_t len = 0;
+        for (int32_t i = 0; i < size; i+=channels) {
+            int32_t pixel = (data[i]+ data[i+1]+ data[i+2])/3;
+            std::cout << pixel;
+        }
+
+        *messageLength = len;
+
+        for(uint32_t i = 0; i < len; i++) {
+            buffer[i] = (buffer[i/8] << 1) | (data[i+STEG_HEADER_SIZE] & 1);
+        }
+
+        return *this;
+    }
     
