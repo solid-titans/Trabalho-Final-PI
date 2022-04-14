@@ -1,2 +1,1 @@
-# Algorithm for image manipulation using C++
-
+# Trabalho final de PI
