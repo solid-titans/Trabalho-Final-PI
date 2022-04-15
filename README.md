@@ -9,7 +9,15 @@ inteiramente composta por gordura (densidade I), por tecido fibrobroglandular di
 por tecido denso heterogêneo (III) e por tecido extremamente denso (IV). A mamografia é a principal
 ferramenta de rastreio do câncer e radiologistas avaliam a densidade da mama com base na análise
 visual das imagens.
+<p float="center">
+  <img src="src/assets/imgs/imagem1.jpg" width="75">
 
+  <img src="src/assets/imgs/imagem2.jpg" width="75">
+
+  <img src="src/assets/imgs/imagem3.jpg" width="75">
+
+  <img src="src/assets/imgs/imagem4.jpg" width="75">
+</p>
 
 Neste trabalho, você deverá implementar um aplicativo que leia imagens de exames mamográficos e
 possibilite o reconhecimento automático da densidade da mama, utilizando técnicas de descrição por
