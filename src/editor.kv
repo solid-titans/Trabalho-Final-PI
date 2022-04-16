@@ -1,28 +1,28 @@
 #:kivy 1.1.0
 
 Root:
-    text_input: text_input
 
-    BoxLayout:
-        orientation: 'vertical'
-        BoxLayout:
-            size_hint_y: None
-            height: 30
-            Button:
-                text: 'Load'
-                on_release: root.show_load()
-            Button:
-                text: 'Save'
-                on_release: root.show_save()
-
-        BoxLayout:
-            TextInput:
-                id: text_input
-                text: ''
-
-            RstDocument:
-                text: text_input.text
-                show_errors: True
+    ActionBar:
+        size: root.width, 50
+        pos: 0, root.height - 50
+        ActionView:
+            use_separator: True
+            ActionGroup:
+                text: 'File' 
+                mode: 'spinner'
+                ActionButton:
+                    text: 'Open'
+                    on_release: root.show_load()
+                ActionButton:
+                    text: 'Save'
+                    on_release: root.show_save()
+                ActionButton:
+                    text: 'Tool3'
+                ActionButton:
+                    text: 'Tool4'
+            ActionPrevious:
+                title: 'Trabalho PI'
+                with_previous: False
 
 <LoadDialog>:
     BoxLayout:
@@ -31,6 +31,7 @@ Root:
         orientation: "vertical"
         FileChooserListView:
             id: filechooser
+            path: root.get_home_path()
 
         BoxLayout:
             size_hint_y: None

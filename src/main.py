@@ -1,14 +1,22 @@
 from kivy.app import App
+
 from kivy.uix.floatlayout import FloatLayout
 from kivy.factory import Factory
 from kivy.properties import ObjectProperty
 from kivy.uix.popup import Popup
+
+from kivy.config import Config
+
+from kivy.core.window import Window
 
 import os
 
 class LoadDialog(FloatLayout):
     load = ObjectProperty(None)
     cancel = ObjectProperty(None)
+
+    def get_home_path(self):
+        return os.path.expanduser('~')
 
 
 class SaveDialog(FloatLayout):
@@ -53,11 +61,7 @@ class Root(FloatLayout):
 class Editor(App):
     pass
 
-
-Factory.register('Root', cls=Root)
-Factory.register('LoadDialog', cls=LoadDialog)
-Factory.register('SaveDialog', cls=SaveDialog)
-
-
 if __name__ == '__main__':
+    Window.clearcolor = (0.2, 0.2, 0.2, 1)
+    Config.set('graphics', 'resizable', False)
     Editor().run()
