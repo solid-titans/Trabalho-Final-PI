@@ -11,13 +11,13 @@ ferramenta de rastreio do câncer e radiologistas avaliam a densidade da mama co
 visual das imagens.
 
 <p align="center">
-  <img src="src/assets/imgs/imagem1.jpg" width="200">
+  <img src="trabalho-final-pi/assets/imgs/imagem1.jpg" width="200">
 
-  <img src="src/assets/imgs/imagem2.jpg" width="200">
+  <img src="trabalho-final-pi/assets/imgs/imagem2.jpg" width="200">
 
-  <img src="src/assets/imgs/imagem3.jpg" width="200">
+  <img src="trabalho-final-pi/assets/imgs/imagem3.jpg" width="200">
 
-  <img src="src/assets/imgs/imagem4.jpg" width="200">
+  <img src="trabalho-final-pi/assets/imgs/imagem4.jpg" width="200">
 </p>
 
 Neste trabalho, você deverá implementar um aplicativo que leia imagens de exames mamográficos e
