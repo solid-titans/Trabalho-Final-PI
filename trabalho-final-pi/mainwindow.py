@@ -21,7 +21,7 @@ class MainWindow(QMainWindow):
         self.ui = loader.load(ui_file, self)
         ui_file.close()
 
-    def show(self) -> None:
+    def show(self):
         return self.ui.show()
 
 if __name__ == "__main__":

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 7.0.0, 2022-04-18T19:34:33. -->
+<!-- Written by QtCreator 7.0.0, 2022-04-18T23:23:27. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -116,16 +116,16 @@
     <valuelist type="QVariantList" key="CustomOutputParsers"/>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">/home/guaruda/HD1/code/trabalho-final-pi/mainwindow.py</value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">PythonEditor.RunConfiguration./home/guaruda/HD1/code/trabalho-final-pi/mainwindow.py</value>
-    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/guaruda/HD1/code/trabalho-final-pi/mainwindow.py</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">/home/guaruda/HD1/code/Trabalho-Final-PI/trabalho-final-pi/mainwindow.py</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">PythonEditor.RunConfiguration./home/guaruda/HD1/code/Trabalho-Final-PI/trabalho-final-pi/mainwindow.py</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/guaruda/HD1/code/Trabalho-Final-PI/trabalho-final-pi/mainwindow.py</value>
     <value type="QString" key="PythonEditor.RunConfiguation.Interpreter">{555169a2-5676-4d89-82d8-1288a63563d1}</value>
-    <value type="QString" key="PythonEditor.RunConfiguation.Script">/home/guaruda/HD1/code/trabalho-final-pi/mainwindow.py</value>
+    <value type="QString" key="PythonEditor.RunConfiguation.Script">/home/guaruda/HD1/code/Trabalho-Final-PI/trabalho-final-pi/mainwindow.py</value>
     <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
     <value type="bool" key="RunConfiguration.UseQmlDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
-    <value type="QString" key="RunConfiguration.WorkingDirectory.default">/home/guaruda/HD1/code/trabalho-final-pi</value>
+    <value type="QString" key="RunConfiguration.WorkingDirectory.default">/home/guaruda/HD1/code/Trabalho-Final-PI/trabalho-final-pi</value>
    </valuemap>
    <value type="qlonglong" key="ProjectExplorer.Target.RunConfigurationCount">1</value>
   </valuemap>
