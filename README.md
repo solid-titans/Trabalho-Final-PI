@@ -38,8 +38,7 @@ c) O ambiente deve ser totalmente gráfico e deverá oferecer as seguintes opç�
 resolução e número de tons de cinza (normalmente variando entre 8 e 16 bits por
 pixel);
 * Ler um diretório contendo 4 subdiretórios com os arquivos de imagens previamente
-recortadas, associadas às 4 classes BIRADS. Os nomes dos subdiretórios serão 1,2,3 e
-4. Essas imagens servirão para treinar e testar o classificador.
+recortadas, associadas às 4 classes BIRADS. Os nomes dos subdiretórios serão 1,2,3 e 4. Essas imagens servirão para treinar e testar o classificador.
 * Oferecer um menu com opções para ler o diretório de imagens de treino/teste; treinar o
 classificador; abrir e visualizar uma imagem; calcular e exibir as características para a
 imagem visualizada ou área selecionada; classificar a imagem ou a região de interesse
