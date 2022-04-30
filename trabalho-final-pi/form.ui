@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>TrabalhoPI</class>
- <widget class="QMainWindow" name="TrabalhoPI">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -22,6 +22,32 @@ selection-color: rgb(94, 92, 100);</string>
    <property name="styleSheet">
     <string notr="true">background-color: rgb(36, 31, 49);</string>
    </property>
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
+       <widget class="QLabel" name="imageLabel">
+        <property name="autoFillBackground">
+         <bool>false</bool>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="showImageButton">
+        <property name="text">
+         <string>Show image</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -36,13 +62,13 @@ selection-color: rgb(94, 92, 100);</string>
     <property name="title">
      <string>File</string>
     </property>
-    <addaction name="OpenFile"/>
+    <addaction name="openFile"/>
     <addaction name="SaveFile"/>
    </widget>
    <addaction name="menuFile"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
-  <action name="OpenFile">
+  <action name="openFile">
    <property name="text">
     <string>Open</string>
    </property>
@@ -54,5 +80,25 @@ selection-color: rgb(94, 92, 100);</string>
   </action>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>openFile</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>update()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>botaoPressionado()</slot>
+ </slots>
 </ui>
