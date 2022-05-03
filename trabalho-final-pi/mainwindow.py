@@ -8,7 +8,11 @@ from PySide6.QtCore import QFile, QCoreApplication, Qt
 from PySide6.QtUiTools import QUiLoader
 from PySide6.QtGui import QPixmap
 
-from skimage import data, io, filters
+from skimage import data, io, filters, draw
+from matplotlib.backends.backend_qtagg import (
+    FigureCanvas, NavigationToolbar2QT as NavigationToolbar)
+from matplotlib.figure import Figure
+import numpy as np
 
 import cv2
 
@@ -35,7 +39,6 @@ class MainWindow(QMainWindow):
 
     def connect_ui_signals(self):
         self.ui.openFile.triggered.connect(self.open_image_file)
-        self.ui.showImageButton.clicked.connect(self.apply_sobel)
 
 
     def show(self):
@@ -44,11 +47,30 @@ class MainWindow(QMainWindow):
     def open_image_file(self):
         file = QFileDialog.getOpenFileName(self,
             str("Open Image"), os.path.expanduser('~'), str("Image Files (*.png *.jpg)"))
+
         if not all(file):
             return
 
+        self.ui.statusbar.showMessage('file opened: ' + str(file[0]), timeout = 2500)
+
         self.file_path = file[0]
         self.ui.imageLabel.setPixmap(QPixmap(self.file_path))
+
+        image = io.imread(self.file_path)
+
+        static_canvas = FigureCanvas(Figure(figsize=(5, 3)))
+
+        for i in reversed(range(self.ui.imageInfoColumn.count())):
+            self.ui.imageInfoColumn.itemAt(i).widget().setParent(None)
+
+        self.ui.imageInfoColumn.addWidget(NavigationToolbar(static_canvas, self))
+        self.ui.imageInfoColumn.addWidget(static_canvas)
+
+        self._static_ax = static_canvas.figure.subplots()
+
+        self._static_ax.set_xlabel('Intensity Value')
+        self._static_ax.set_ylabel('Count')
+        self._static_ax.hist(image.ravel(), 256,[0,256])
 
     def apply_sobel(self):
 
@@ -70,5 +92,6 @@ if __name__ == "__main__":
     QCoreApplication.setAttribute(Qt.AA_ShareOpenGLContexts)
     qt_app = QApplication(sys.argv)
     widget = MainWindow()
+    widget.resize(500,300);
     widget.show()
     sys.exit(qt_app.exec())
