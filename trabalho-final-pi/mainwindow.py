@@ -2,19 +2,14 @@
 import os
 from pathlib import Path
 import sys
-
-from PySide6.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBox
-from PySide6.QtCore import QFile, QCoreApplication, Qt
-from PySide6.QtUiTools import QUiLoader
-from PySide6.QtGui import QPixmap
-
-from skimage import data, io, filters, draw
-from matplotlib.backends.backend_qtagg import (
-    FigureCanvas, NavigationToolbar2QT as NavigationToolbar)
-from matplotlib.figure import Figure
 import numpy as np
 
-import cv2
+from PySide6.QtWidgets import QApplication, QMainWindow
+from PySide6.QtCore import QFile, QCoreApplication, Qt
+from PySide6.QtUiTools import QUiLoader
+
+from widgets.image_displayer import ImageDisplayer
+from widgets.image_plotter   import ImagePlotter
 
 class MainWindow(QMainWindow):
 
@@ -26,8 +21,9 @@ class MainWindow(QMainWindow):
         self.ui.setWindowTitle('Trabalho PI')
         self.connect_ui_signals()
 
-        # Initiate variables
-        self.file_path = ''
+        # Initiate widgets
+        self.image_displayer = ImageDisplayer(self.ui.imageLabel)
+        self.image_plotter   = ImagePlotter(self.ui.imageInfoColumn)
 
     def load_ui(self):
         loader = QUiLoader()
@@ -38,60 +34,23 @@ class MainWindow(QMainWindow):
         ui_file.close()
 
     def connect_ui_signals(self):
-        self.ui.openFile.triggered.connect(self.open_image_file)
-
+        self.ui.openFile.triggered.connect(self.load_image_file)
 
     def show(self):
         return self.ui.show()
 
-    def open_image_file(self):
-        file = QFileDialog.getOpenFileName(self,
-            str("Open Image"), os.path.expanduser('~'), str("Image Files (*.png *.jpg)"))
+    def load_image_file(self):
 
-        if not all(file):
-            return
+        file_path = self.image_displayer.get_image_from_system(self)
 
-        self.ui.statusbar.showMessage('file opened: ' + str(file[0]), timeout = 2500)
+        self.ui.statusbar.showMessage('file opened: ' + str(file_path), timeout = 2500)
 
-        self.file_path = file[0]
-        self.ui.imageLabel.setPixmap(QPixmap(self.file_path))
-
-        image = io.imread(self.file_path)
-
-        static_canvas = FigureCanvas(Figure(figsize=(5, 3)))
-
-        for i in reversed(range(self.ui.imageInfoColumn.count())):
-            self.ui.imageInfoColumn.itemAt(i).widget().setParent(None)
-
-        self.ui.imageInfoColumn.addWidget(NavigationToolbar(static_canvas, self))
-        self.ui.imageInfoColumn.addWidget(static_canvas)
-
-        self._static_ax = static_canvas.figure.subplots()
-
-        self._static_ax.set_xlabel('Intensity Value')
-        self._static_ax.set_ylabel('Count')
-        self._static_ax.hist(image.ravel(), 256,[0,256])
-
-    def apply_sobel(self):
-
-        if not self.file_path:
-            QMessageBox.critical(
-                self,
-                "Error!",
-                "No image was opened!",
-                buttons=QMessageBox.Ok
-            )
-            return
-
-        img = io.imread(self.file_path)
-        edges = filters.sobel(img)
-        cv2.imshow('teste',edges)
+        self.image_plotter.plot_histogram(self,file_path)
 
 if __name__ == "__main__":
 
     QCoreApplication.setAttribute(Qt.AA_ShareOpenGLContexts)
     qt_app = QApplication(sys.argv)
     widget = MainWindow()
-    widget.resize(500,300);
     widget.show()
     sys.exit(qt_app.exec())
