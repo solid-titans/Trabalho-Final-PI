@@ -43,8 +43,10 @@ class MainWindow(QMainWindow):
 
         file_path = self.image_displayer.get_image_from_system(self)
 
-        self.ui.statusbar.showMessage('file opened: ' + str(file_path), timeout = 2500)
+        if not file_path:
+            return
 
+        self.ui.statusbar.showMessage('file opened: ' + str(file_path), timeout = 2500)
         self.image_plotter.plot_histogram(self,file_path)
 
 if __name__ == "__main__":

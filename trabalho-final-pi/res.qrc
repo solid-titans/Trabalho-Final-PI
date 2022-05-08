@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/icons">
+        <file>assets/icons/select-area.png</file>
+        <file>assets/icons/undo.png</file>
+    </qresource>
+</RCC>

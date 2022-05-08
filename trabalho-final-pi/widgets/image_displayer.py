@@ -9,7 +9,7 @@ class ImageDisplayer():
     def __init__(self,ui : QLabel):
         self.ui = ui
         self.file_path = ''
-        self.ui.mousePressed.connect(
+        #self.ui.mousePressed.connect(
 
     def get_image_from_system(self,main_window) -> str:
         file = QFileDialog.getOpenFileName(main_window,
