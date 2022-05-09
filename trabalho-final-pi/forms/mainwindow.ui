@@ -86,15 +86,19 @@ border-color: rgb(119, 118, 123);</string>
            </size>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>1</number>
           </property>
-          <widget class="ImagePlotter" name="imageHistogram">
+          <widget class="QWidget" name="imageHistogram">
            <attribute name="title">
             <string>Histogram</string>
            </attribute>
-           <layout class="QHBoxLayout" name="horizontalLayout_4"/>
+           <layout class="QHBoxLayout" name="horizontalLayout_4">
+            <item>
+             <widget class="ImagePlotter" name="histogramData" native="true"/>
+            </item>
+           </layout>
           </widget>
-          <widget class="QWidget" name="imageCocorrency">
+          <widget class="ImagePlotter" name="imageCocorrency">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
              <horstretch>0</horstretch>
@@ -155,7 +159,7 @@ border-color: rgb(119, 118, 123);</string>
    <addaction name="menuEdit"/>
    <addaction name="menuTrain"/>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
+  <widget class="MyStatusBar" name="statusbar"/>
   <widget class="QToolBar" name="toolBar">
    <property name="windowTitle">
     <string>toolBar</string>
@@ -239,15 +243,27 @@ border-color: rgb(119, 118, 123);</string>
   <customwidget>
    <class>ImageDisplayer</class>
    <extends>QLabel</extends>
-   <header>widgets/image_displayer.h</header>
+   <header>widgets/image/image_displayer.h</header>
+   <slots>
+    <signal>new_image(QString)</signal>
+    <slot>load_image_from_system()</slot>
+   </slots>
   </customwidget>
   <customwidget>
    <class>ImagePlotter</class>
    <extends>QWidget</extends>
-   <header>widgets.image_plotter.h</header>
+   <header>widgets/image/image_plotter.h</header>
    <container>1</container>
    <slots>
-    <slot>plot_histogram(QString)</slot>
+    <slot>plot_image(QString)</slot>
+   </slots>
+  </customwidget>
+  <customwidget>
+   <class>MyStatusBar</class>
+   <extends>QStatusBar</extends>
+   <header>widgets/status_bar/my_status_bar.h</header>
+   <slots>
+    <slot>new_image_loaded(QString)</slot>
    </slots>
   </customwidget>
  </customwidgets>
@@ -256,7 +272,7 @@ border-color: rgb(119, 118, 123);</string>
   <connection>
    <sender>openFile</sender>
    <signal>triggered()</signal>
-   <receiver>MainWindow</receiver>
+   <receiver>imageLabel</receiver>
    <slot>load_image_from_system()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -264,8 +280,8 @@ border-color: rgb(119, 118, 123);</string>
      <y>-1</y>
     </hint>
     <hint type="destinationlabel">
-     <x>545</x>
-     <y>549</y>
+     <x>160</x>
+     <y>569</y>
     </hint>
    </hints>
   </connection>
@@ -285,9 +301,37 @@ border-color: rgb(119, 118, 123);</string>
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>imageLabel</sender>
+   <signal>new_image(QString)</signal>
+   <receiver>histogramData</receiver>
+   <slot>plot_image(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>160</x>
+     <y>569</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>698</x>
+     <y>583</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>imageLabel</sender>
+   <signal>new_image(QString)</signal>
+   <receiver>statusbar</receiver>
+   <slot>new_image_loaded(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>160</x>
+     <y>569</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>545</x>
+     <y>1088</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
- <slots>
-  <slot>load_image_from_system()</slot>
-  <slot>plot_loaded_image(QString)</slot>
- </slots>
 </ui>

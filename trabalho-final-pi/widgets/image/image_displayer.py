@@ -1,23 +1,34 @@
 # This Python file uses the following encoding: utf-8
 from PyQt6.QtWidgets import QFileDialog, QLabel
 from PyQt6.QtGui import QPixmap
+from PyQt6.QtCore import pyqtSignal
 
 import cv2
 import os
 
 class ImageDisplayer(QLabel):
 
+    # Custom Signals
+    new_image = pyqtSignal(str)
+
     def __init__(self,*args,**kwargs):
         QLabel.__init__(self,*args,**kwargs)
         self.file_path = ''
         self.setAcceptDrops(True)
 
+    def load_image_from_system(self):
+        file = QFileDialog.getOpenFileName(self,
+            str("Open Image"), os.path.expanduser('~'), str("Image Files (*.png *.jpg)"))
+
+        if not all(file):
+            return
+
+        self.set_image(file[0])
+
     def set_image(self,file_path):
         self.file_path = file_path
         super().setPixmap(QPixmap(self.file_path))
-
-    def show_image_in_cv(self):
-        pass
+        self.new_image.emit(file_path)
 
     """
     Drag and drop event handling

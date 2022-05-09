@@ -1,3 +1,10 @@
 {
-    "files": ["widgets/image_plotter.py","mainwindow.ui","widgets/image_displayer.py","mainwindow.py"]
+    "files":
+        [
+    "mainwindow.py",
+    "widgets/image/image_displayer.py",
+    "forms/mainwindow.ui",
+    "widgets/image/image_plotter.py",
+    "widgets/status_bar/my_status_bar.py"
+        ]
 }

@@ -17,7 +17,7 @@ class ImagePlotter(QWidget):
         for i in reversed(range(self.layout.count())):
             self.imageInfoColumn.itemAt(i).widget().setParent(None)
 
-    def plot_histogram(self,file_path):
+    def plot_image(self,file_path):
 
         image = io.imread(file_path)
 
