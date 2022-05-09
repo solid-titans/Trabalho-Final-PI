@@ -34,7 +34,7 @@ selection-color: rgb(94, 92, 100);</string>
          <enum>QLayout::SetDefaultConstraint</enum>
         </property>
         <item>
-         <widget class="QLabel" name="imageLabel">
+         <widget class="ImageDisplayer" name="imageLabel">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
             <horstretch>50</horstretch>
@@ -66,7 +66,7 @@ border-color: rgb(119, 118, 123);</string>
          </widget>
         </item>
         <item>
-         <widget class="QTabWidget" name="tabWidget">
+         <widget class="QTabWidget" name="imageInformation">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
             <horstretch>0</horstretch>
@@ -86,17 +86,13 @@ border-color: rgb(119, 118, 123);</string>
            </size>
           </property>
           <property name="currentIndex">
-           <number>1</number>
+           <number>0</number>
           </property>
-          <widget class="QWidget" name="imageInformation">
+          <widget class="ImagePlotter" name="imageHistogram">
            <attribute name="title">
             <string>Histogram</string>
            </attribute>
-           <layout class="QHBoxLayout" name="horizontalLayout_4">
-            <item>
-             <layout class="QVBoxLayout" name="imageInfoColumn"/>
-            </item>
-           </layout>
+           <layout class="QHBoxLayout" name="horizontalLayout_4"/>
           </widget>
           <widget class="QWidget" name="imageCocorrency">
            <property name="sizePolicy">
@@ -133,7 +129,7 @@ border-color: rgb(119, 118, 123);</string>
     <addaction name="openFile"/>
     <addaction name="saveFile"/>
     <addaction name="separator"/>
-    <addaction name="Quit"/>
+    <addaction name="quit"/>
    </widget>
    <widget class="QMenu" name="menuTrain">
     <property name="title">
@@ -202,7 +198,7 @@ border-color: rgb(119, 118, 123);</string>
     <string>Select dataset</string>
    </property>
   </action>
-  <action name="Quit">
+  <action name="quit">
    <property name="icon">
     <iconset>
      <normaloff>assets/icons/quit.png</normaloff>assets/icons/quit.png</iconset>
@@ -239,9 +235,59 @@ border-color: rgb(119, 118, 123);</string>
    </property>
   </action>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>ImageDisplayer</class>
+   <extends>QLabel</extends>
+   <header>widgets/image_displayer.h</header>
+  </customwidget>
+  <customwidget>
+   <class>ImagePlotter</class>
+   <extends>QWidget</extends>
+   <header>widgets.image_plotter.h</header>
+   <container>1</container>
+   <slots>
+    <slot>plot_histogram(QString)</slot>
+   </slots>
+  </customwidget>
+ </customwidgets>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>openFile</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>load_image_from_system()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>545</x>
+     <y>549</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>quit</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>545</x>
+     <y>549</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
  <slots>
-  <slot>botaoPressionado()</slot>
+  <slot>load_image_from_system()</slot>
+  <slot>plot_loaded_image(QString)</slot>
  </slots>
 </ui>

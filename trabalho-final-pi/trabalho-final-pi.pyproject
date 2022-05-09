@@ -1,3 +1,3 @@
 {
-    "files": ["widgets/image_plotter.py","widgets/image_displayer.py","form.ui","mainwindow.py","res.qrc"]
+    "files": ["widgets/image_plotter.py","mainwindow.ui","widgets/image_displayer.py","mainwindow.py"]
 }
