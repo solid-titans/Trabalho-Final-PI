@@ -16,6 +16,7 @@ class ImageDisplayer(QLabel):
         self.file_path = ''
         self.setAcceptDrops(True)
 
+    #@Slot
     def load_image_from_system(self):
         file = QFileDialog.getOpenFileName(self,
             str("Open Image"), os.path.expanduser('~'), str("Image Files (*.png *.jpg)"))
