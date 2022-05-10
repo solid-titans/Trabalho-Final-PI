@@ -7,7 +7,7 @@ from matplotlib.figure import Figure
 
 from skimage import io
 
-class ImagePlotter(QWidget):
+class ImageHistogram(QWidget):
     def __init__(self,*args,**kwargs):
         QWidget.__init__(self,*args,**kwargs)
         self.layout = QVBoxLayout()
@@ -17,6 +17,7 @@ class ImagePlotter(QWidget):
         for i in reversed(range(self.layout.count())):
             self.imageInfoColumn.itemAt(i).widget().setParent(None)
 
+    #@Slot
     def plot_image(self,file_path):
 
         image = io.imread(file_path)

@@ -86,7 +86,7 @@ border-color: rgb(119, 118, 123);</string>
            </size>
           </property>
           <property name="currentIndex">
-           <number>1</number>
+           <number>0</number>
           </property>
           <widget class="QWidget" name="imageHistogram">
            <attribute name="title">
@@ -94,11 +94,11 @@ border-color: rgb(119, 118, 123);</string>
            </attribute>
            <layout class="QHBoxLayout" name="horizontalLayout_4">
             <item>
-             <widget class="ImagePlotter" name="histogramData" native="true"/>
+             <widget class="ImageHistogram" name="histogramData" native="true"/>
             </item>
            </layout>
           </widget>
-          <widget class="ImagePlotter" name="imageCocorrency">
+          <widget class="ImageHistogram" name="imageCocorrency">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
              <horstretch>0</horstretch>
@@ -179,7 +179,7 @@ border-color: rgb(119, 118, 123);</string>
   <action name="openFile">
    <property name="icon">
     <iconset>
-     <normaloff>assets/icons/open-file.png</normaloff>assets/icons/open-file.png</iconset>
+     <normaloff>../assets/icons/open-file.png</normaloff>../assets/icons/open-file.png</iconset>
    </property>
    <property name="text">
     <string>Open</string>
@@ -191,7 +191,7 @@ border-color: rgb(119, 118, 123);</string>
   <action name="saveFile">
    <property name="icon">
     <iconset>
-     <normaloff>assets/icons/save.png</normaloff>assets/icons/save.png</iconset>
+     <normaloff>../assets/icons/save.png</normaloff>../assets/icons/save.png</iconset>
    </property>
    <property name="text">
     <string>Save</string>
@@ -205,7 +205,7 @@ border-color: rgb(119, 118, 123);</string>
   <action name="quit">
    <property name="icon">
     <iconset>
-     <normaloff>assets/icons/quit.png</normaloff>assets/icons/quit.png</iconset>
+     <normaloff>../assets/icons/quit.png</normaloff>../assets/icons/quit.png</iconset>
    </property>
    <property name="text">
     <string>Quit</string>
@@ -214,7 +214,7 @@ border-color: rgb(119, 118, 123);</string>
   <action name="selectRegion">
    <property name="icon">
     <iconset>
-     <normaloff>assets/icons/select-area.png</normaloff>assets/icons/select-area.png</iconset>
+     <normaloff>../assets/icons/select-area.png</normaloff>../assets/icons/select-area.png</iconset>
    </property>
    <property name="text">
     <string>Select</string>
@@ -223,7 +223,7 @@ border-color: rgb(119, 118, 123);</string>
   <action name="undoSelection">
    <property name="icon">
     <iconset>
-     <normaloff>assets/icons/undo.png</normaloff>assets/icons/undo.png</iconset>
+     <normaloff>../assets/icons/undo.png</normaloff>../assets/icons/undo.png</iconset>
    </property>
    <property name="text">
     <string>Undo selection</string>
@@ -232,7 +232,7 @@ border-color: rgb(119, 118, 123);</string>
   <action name="redoSelection">
    <property name="icon">
     <iconset>
-     <normaloff>assets/icons/redo.png</normaloff>assets/icons/redo.png</iconset>
+     <normaloff>../assets/icons/redo.png</normaloff>../assets/icons/redo.png</iconset>
    </property>
    <property name="text">
     <string>Redo</string>
@@ -250,9 +250,9 @@ border-color: rgb(119, 118, 123);</string>
    </slots>
   </customwidget>
   <customwidget>
-   <class>ImagePlotter</class>
+   <class>ImageHistogram</class>
    <extends>QWidget</extends>
-   <header>widgets/image/image_plotter.h</header>
+   <header>widgets/image/image_histogram.h</header>
    <container>1</container>
    <slots>
     <slot>plot_image(QString)</slot>

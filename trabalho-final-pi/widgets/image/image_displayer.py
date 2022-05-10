@@ -1,7 +1,7 @@
 # This Python file uses the following encoding: utf-8
 from PyQt6.QtWidgets import QFileDialog, QLabel
 from PyQt6.QtGui import QPixmap
-from PyQt6.QtCore import pyqtSignal
+from PyQt6.QtCore import pyqtSignal as Signal
 
 import cv2
 import os
@@ -9,7 +9,7 @@ import os
 class ImageDisplayer(QLabel):
 
     # Custom Signals
-    new_image = pyqtSignal(str)
+    new_image = Signal(str)
 
     def __init__(self,*args,**kwargs):
         QLabel.__init__(self,*args,**kwargs)

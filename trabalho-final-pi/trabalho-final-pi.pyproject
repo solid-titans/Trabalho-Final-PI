@@ -4,7 +4,7 @@
     "mainwindow.py",
     "widgets/image/image_displayer.py",
     "forms/mainwindow.ui",
-    "widgets/image/image_plotter.py",
+    "widgets/image/image_histogram.py",
     "widgets/status_bar/my_status_bar.py"
         ]
 }
