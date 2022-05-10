@@ -5,6 +5,7 @@ import sys
 
 from PyQt6.QtWidgets import QApplication, QMainWindow
 from PyQt6.QtCore import Qt
+from PyQt6.QtGui import QGuiApplication
 from PyQt6 import uic
 
 class MainWindow(QMainWindow):
@@ -14,6 +15,7 @@ class MainWindow(QMainWindow):
         self.loadUi()
 
         self.setWindowTitle('Trabalho PI')
+        self.showMaximized()
 
     def loadUi(self):
         path = os.fspath(Path(__file__).resolve().parent / "forms/mainwindow.ui")
