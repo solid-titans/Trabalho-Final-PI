@@ -6,6 +6,18 @@ from PyQt6.QtCore import pyqtSignal as Signal
 import cv2
 import os
 
+DEFAULT_STYLESHEET = """background-color: rgb(28, 25, 32);
+                     border-color: rgb(255,255,255);
+                     border-style: solid;
+                     border-width: 2px;
+                     border-radius: 20px;""";
+
+HIGHLIGHTED_STYLESHEET = """background-color: rgb(28, 25, 32);
+                         border-color: rgb(250,100,100);
+                         border-style: solid;
+                         border-width: 2px;
+                         border-radius: 20px;""";
+
 class ImageDisplayer(QLabel):
 
     # Custom Signals
@@ -15,6 +27,7 @@ class ImageDisplayer(QLabel):
         QLabel.__init__(self,*args,**kwargs)
         self.file_path = ''
         self.setAcceptDrops(True)
+        self.setStyleSheet(DEFAULT_STYLESHEET)
 
     #@Slot
     def load_image_from_system(self):
@@ -36,21 +49,29 @@ class ImageDisplayer(QLabel):
     """
     def dragEnterEvent(self, event):
         if event.mimeData().hasImage:
+            self.setStyleSheet(HIGHLIGHTED_STYLESHEET)
             event.accept()
         else:
+            self.setStyleSheet(DEFAULT_STYLESHEET)
             event.ignore()
+
+    def dragLeaveEvent(self, event):
+        self.setStyleSheet(DEFAULT_STYLESHEET)
 
     def dragMoveEvent(self, event):
         if event.mimeData().hasImage:
+            self.setStyleSheet(HIGHLIGHTED_STYLESHEET)
             event.accept()
         else:
+            self.setStyleSheet(DEFAULT_STYLESHEET)
             event.ignore()
 
     def dropEvent(self, event):
         if event.mimeData().hasImage:
             file_path = event.mimeData().urls()[0].toLocalFile()
             self.set_image(file_path)
-
+            self.setStyleSheet(DEFAULT_STYLESHEET)
             event.accept()
         else:
+
             event.ignore()

@@ -52,10 +52,16 @@ selection-color: rgb(94, 92, 100);</string>
           </property>
           <property name="styleSheet">
            <string notr="true">background-color: rgb(28, 25, 32);
-border-color: rgb(119, 118, 123);</string>
+border-color: rgb(255,255,255);
+border-style: solid;
+border-width: 2px; 
+border-radius: 20px;</string>
           </property>
           <property name="frameShape">
            <enum>QFrame::Box</enum>
+          </property>
+          <property name="lineWidth">
+           <number>0</number>
           </property>
           <property name="text">
            <string>Please Insert an image...</string>
@@ -128,7 +134,7 @@ border-color: rgb(119, 118, 123);</string>
    </property>
    <widget class="QMenu" name="menuFile">
     <property name="title">
-     <string>Image</string>
+     <string>File</string>
     </property>
     <addaction name="openFile"/>
     <addaction name="saveFile"/>
@@ -155,8 +161,25 @@ border-color: rgb(119, 118, 123);</string>
     </widget>
     <addaction name="menuRegion"/>
    </widget>
+   <widget class="QMenu" name="menuImage">
+    <property name="title">
+     <string>Image</string>
+    </property>
+    <widget class="QMenu" name="menuFilters">
+     <property name="title">
+      <string>Filters</string>
+     </property>
+     <addaction name="separator"/>
+     <addaction name="separator"/>
+     <addaction name="equalization"/>
+     <addaction name="sharpen"/>
+     <addaction name="brightnessContrast"/>
+    </widget>
+    <addaction name="menuFilters"/>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuEdit"/>
+   <addaction name="menuImage"/>
    <addaction name="menuTrain"/>
   </widget>
   <widget class="MyStatusBar" name="statusbar"/>
@@ -236,6 +259,21 @@ border-color: rgb(119, 118, 123);</string>
    </property>
    <property name="text">
     <string>Redo</string>
+   </property>
+  </action>
+  <action name="equalization">
+   <property name="text">
+    <string>Equalization</string>
+   </property>
+  </action>
+  <action name="sharpen">
+   <property name="text">
+    <string>Sharpen</string>
+   </property>
+  </action>
+  <action name="brightnessContrast">
+   <property name="text">
+    <string>Brightness and Contrast</string>
    </property>
   </action>
  </widget>
