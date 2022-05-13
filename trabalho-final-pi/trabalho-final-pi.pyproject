@@ -5,6 +5,8 @@
     "widgets/image/image_displayer.py",
     "forms/mainwindow.ui",
     "widgets/image/image_histogram.py",
+    "widgets/image/image_coocurrence.py",
+    "widgets/image/image_processor.py",
     "widgets/status_bar/my_status_bar.py"
         ]
 }

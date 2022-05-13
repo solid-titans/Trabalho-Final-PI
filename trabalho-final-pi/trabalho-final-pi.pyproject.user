@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 7.0.0, 2022-05-11T22:55:25. -->
+<!-- Written by QtCreator 7.0.0, 2022-05-12T22:39:50. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -116,16 +116,16 @@
     <valuelist type="QVariantList" key="CustomOutputParsers"/>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">/home/guaruda/HD1/code/Trabalho-Final-PI/trabalho-final-pi/mainwindow.py</value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">PythonEditor.RunConfiguration./home/guaruda/HD1/code/Trabalho-Final-PI/trabalho-final-pi/mainwindow.py</value>
-    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/guaruda/HD1/code/Trabalho-Final-PI/trabalho-final-pi/mainwindow.py</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">/home/guaruda/HD1/code/Trabalho-Final-PI/trabalho-final-pi/widgets/status_bar/my_status_bar.py</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">PythonEditor.RunConfiguration./home/guaruda/HD1/code/Trabalho-Final-PI/trabalho-final-pi/widgets/status_bar/my_status_bar.py</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/guaruda/HD1/code/Trabalho-Final-PI/trabalho-final-pi/widgets/status_bar/my_status_bar.py</value>
     <value type="QString" key="PythonEditor.RunConfiguation.Interpreter">{555169a2-5676-4d89-82d8-1288a63563d1}</value>
-    <value type="QString" key="PythonEditor.RunConfiguation.Script">/home/guaruda/HD1/code/Trabalho-Final-PI/trabalho-final-pi/mainwindow.py</value>
+    <value type="QString" key="PythonEditor.RunConfiguation.Script">/home/guaruda/HD1/code/Trabalho-Final-PI/trabalho-final-pi/widgets/status_bar/my_status_bar.py</value>
     <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
     <value type="bool" key="RunConfiguration.UseQmlDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
-    <value type="QString" key="RunConfiguration.WorkingDirectory.default">/home/guaruda/HD1/code/Trabalho-Final-PI/trabalho-final-pi</value>
+    <value type="QString" key="RunConfiguration.WorkingDirectory.default">/home/guaruda/HD1/code/Trabalho-Final-PI/trabalho-final-pi/widgets/status_bar</value>
    </valuemap>
    <valuemap type="QVariantMap" key="ProjectExplorer.Target.RunConfiguration.1">
     <value type="bool" key="Analyzer.Perf.Settings.UseGlobalSettings">true</value>
@@ -137,7 +137,6 @@
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">/home/guaruda/HD1/code/Trabalho-Final-PI/trabalho-final-pi/widgets/image/image_displayer.py</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">PythonEditor.RunConfiguration./home/guaruda/HD1/code/Trabalho-Final-PI/trabalho-final-pi/widgets/image/image_displayer.py</value>
     <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/guaruda/HD1/code/Trabalho-Final-PI/trabalho-final-pi/widgets/image/image_displayer.py</value>
-    <value type="QString" key="PythonEditor.RunConfiguation.Interpreter">{0c48f7e7-d39d-47d4-9633-73f198740f4e}</value>
     <value type="QString" key="PythonEditor.RunConfiguation.Script">/home/guaruda/HD1/code/Trabalho-Final-PI/trabalho-final-pi/widgets/image/image_displayer.py</value>
     <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
@@ -152,18 +151,34 @@
     <valuelist type="QVariantList" key="CustomOutputParsers"/>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">/home/guaruda/HD1/code/Trabalho-Final-PI/trabalho-final-pi/widgets/status_bar/my_status_bar.py</value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">PythonEditor.RunConfiguration./home/guaruda/HD1/code/Trabalho-Final-PI/trabalho-final-pi/widgets/status_bar/my_status_bar.py</value>
-    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/guaruda/HD1/code/Trabalho-Final-PI/trabalho-final-pi/widgets/status_bar/my_status_bar.py</value>
-    <value type="QString" key="PythonEditor.RunConfiguation.Interpreter">{411c61e6-364b-43bb-a753-329d745528af}</value>
-    <value type="QString" key="PythonEditor.RunConfiguation.Script">/home/guaruda/HD1/code/Trabalho-Final-PI/trabalho-final-pi/widgets/status_bar/my_status_bar.py</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">/home/guaruda/HD1/code/Trabalho-Final-PI/trabalho-final-pi/mainwindow.py</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">PythonEditor.RunConfiguration./home/guaruda/HD1/code/Trabalho-Final-PI/trabalho-final-pi/mainwindow.py</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/guaruda/HD1/code/Trabalho-Final-PI/trabalho-final-pi/mainwindow.py</value>
+    <value type="QString" key="PythonEditor.RunConfiguation.Script">/home/guaruda/HD1/code/Trabalho-Final-PI/trabalho-final-pi/mainwindow.py</value>
     <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
     <value type="bool" key="RunConfiguration.UseQmlDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
-    <value type="QString" key="RunConfiguration.WorkingDirectory.default">/home/guaruda/HD1/code/Trabalho-Final-PI/trabalho-final-pi/widgets/status_bar</value>
+    <value type="QString" key="RunConfiguration.WorkingDirectory.default">/home/guaruda/HD1/code/Trabalho-Final-PI/trabalho-final-pi</value>
    </valuemap>
    <valuemap type="QVariantMap" key="ProjectExplorer.Target.RunConfiguration.3">
+    <value type="bool" key="Analyzer.Perf.Settings.UseGlobalSettings">true</value>
+    <value type="bool" key="Analyzer.QmlProfiler.Settings.UseGlobalSettings">true</value>
+    <value type="bool" key="Analyzer.Valgrind.Settings.UseGlobalSettings">true</value>
+    <valuelist type="QVariantList" key="CustomOutputParsers"/>
+    <value type="int" key="PE.EnvironmentAspect.Base">2</value>
+    <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">/home/guaruda/HD1/code/Trabalho-Final-PI/trabalho-final-pi/widgets/image/image_coocurrence.py</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">PythonEditor.RunConfiguration./home/guaruda/HD1/code/Trabalho-Final-PI/trabalho-final-pi/widgets/image/image_coocurrence.py</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/guaruda/HD1/code/Trabalho-Final-PI/trabalho-final-pi/widgets/image/image_coocurrence.py</value>
+    <value type="QString" key="PythonEditor.RunConfiguation.Script">/home/guaruda/HD1/code/Trabalho-Final-PI/trabalho-final-pi/widgets/image/image_coocurrence.py</value>
+    <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>
+    <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
+    <value type="bool" key="RunConfiguration.UseQmlDebugger">false</value>
+    <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
+    <value type="QString" key="RunConfiguration.WorkingDirectory.default">/home/guaruda/HD1/code/Trabalho-Final-PI/trabalho-final-pi/widgets/image</value>
+   </valuemap>
+   <valuemap type="QVariantMap" key="ProjectExplorer.Target.RunConfiguration.4">
     <value type="bool" key="Analyzer.Perf.Settings.UseGlobalSettings">true</value>
     <value type="bool" key="Analyzer.QmlProfiler.Settings.UseGlobalSettings">true</value>
     <value type="bool" key="Analyzer.Valgrind.Settings.UseGlobalSettings">true</value>
@@ -173,7 +188,6 @@
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">/home/guaruda/HD1/code/Trabalho-Final-PI/trabalho-final-pi/widgets/image/image_histogram.py</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">PythonEditor.RunConfiguration./home/guaruda/HD1/code/Trabalho-Final-PI/trabalho-final-pi/widgets/image/image_histogram.py</value>
     <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/guaruda/HD1/code/Trabalho-Final-PI/trabalho-final-pi/widgets/image/image_histogram.py</value>
-    <value type="QString" key="PythonEditor.RunConfiguation.Interpreter">{f9e3291f-f6c2-447f-be1a-278b47cd3eca}</value>
     <value type="QString" key="PythonEditor.RunConfiguation.Script">/home/guaruda/HD1/code/Trabalho-Final-PI/trabalho-final-pi/widgets/image/image_histogram.py</value>
     <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
@@ -181,7 +195,24 @@
     <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
     <value type="QString" key="RunConfiguration.WorkingDirectory.default">/home/guaruda/HD1/code/Trabalho-Final-PI/trabalho-final-pi/widgets/image</value>
    </valuemap>
-   <value type="qlonglong" key="ProjectExplorer.Target.RunConfigurationCount">4</value>
+   <valuemap type="QVariantMap" key="ProjectExplorer.Target.RunConfiguration.5">
+    <value type="bool" key="Analyzer.Perf.Settings.UseGlobalSettings">true</value>
+    <value type="bool" key="Analyzer.QmlProfiler.Settings.UseGlobalSettings">true</value>
+    <value type="bool" key="Analyzer.Valgrind.Settings.UseGlobalSettings">true</value>
+    <valuelist type="QVariantList" key="CustomOutputParsers"/>
+    <value type="int" key="PE.EnvironmentAspect.Base">2</value>
+    <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">/home/guaruda/HD1/code/Trabalho-Final-PI/trabalho-final-pi/widgets/image/image_processor.py</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">PythonEditor.RunConfiguration./home/guaruda/HD1/code/Trabalho-Final-PI/trabalho-final-pi/widgets/image/image_processor.py</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/guaruda/HD1/code/Trabalho-Final-PI/trabalho-final-pi/widgets/image/image_processor.py</value>
+    <value type="QString" key="PythonEditor.RunConfiguation.Script">/home/guaruda/HD1/code/Trabalho-Final-PI/trabalho-final-pi/widgets/image/image_processor.py</value>
+    <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>
+    <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
+    <value type="bool" key="RunConfiguration.UseQmlDebugger">false</value>
+    <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
+    <value type="QString" key="RunConfiguration.WorkingDirectory.default">/home/guaruda/HD1/code/Trabalho-Final-PI/trabalho-final-pi/widgets/image</value>
+   </valuemap>
+   <value type="qlonglong" key="ProjectExplorer.Target.RunConfigurationCount">6</value>
   </valuemap>
  </data>
  <data>
