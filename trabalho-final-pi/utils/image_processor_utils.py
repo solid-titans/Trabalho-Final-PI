@@ -2,17 +2,16 @@ import numpy as np
 import cv2 as cv
 from matplotlib import pyplot as plt
 
-
 def sharpen(image, parameters=0):
-    pass
+    kernel = np.array([[-1,-1,-1], [-1,9,-1], [-1,-1,-1]])
+    return cv.filter2D(image, -1, kernel)
 
-
-def gaussian_blur(image, ksize=(3, 3), border=cv.BORDER_DEFAULT):
+def gaussian_blur(image, ksize=(15, 15), border=cv.BORDER_DEFAULT):
     return cv.GaussianBlur(image, ksize, border)
 
 
 def equalization(image):
-    R, G, B = cv.split(img)
+    R, G, B = cv.split(image)
 
     output1_R = cv.equalizeHist(R)
     output1_G = cv.equalizeHist(G)

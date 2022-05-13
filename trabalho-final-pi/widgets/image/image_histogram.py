@@ -16,7 +16,7 @@ class ImageHistogram(QWidget):
 
     def remove_children(self):
         for i in reversed(range(self.layout.count())):
-            self.imageInfoColumn.itemAt(i).widget().setParent(None)
+            self.layout.itemAt(i).widget().setParent(None)
 
     #@Slot
     def plot_image(self,file_path):

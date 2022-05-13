@@ -171,6 +171,7 @@ border-radius: 20px;</string>
      <addaction name="equalization"/>
      <addaction name="sharpen"/>
      <addaction name="brightnessContrast"/>
+     <addaction name="gaussianBlur"/>
     </widget>
     <addaction name="menuFilters"/>
    </widget>
@@ -278,6 +279,11 @@ border-radius: 20px;</string>
     <string>Train classifier</string>
    </property>
   </action>
+  <action name="gaussianBlur">
+   <property name="text">
+    <string>Gaussian Blur</string>
+   </property>
+  </action>
  </widget>
  <customwidgets>
   <customwidget>
@@ -330,6 +336,8 @@ border-radius: 20px;</string>
     <slot>apply_sharpen()</slot>
     <slot>apply_gaussian()</slot>
     <slot>apply_brightness_and_contrast()</slot>
+    <slot>apply_equalization()</slot>
+    <slot>train_classifiers()</slot>
    </slots>
   </customwidget>
  </customwidgets>
@@ -468,6 +476,86 @@ border-radius: 20px;</string>
    <signal>triggered()</signal>
    <receiver>imageProcessor</receiver>
    <slot>open_training_images_folder()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>545</x>
+     <y>569</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>brightnessContrast</sender>
+   <signal>triggered()</signal>
+   <receiver>imageProcessor</receiver>
+   <slot>apply_brightness_and_contrast()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>545</x>
+     <y>569</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>sharpen</sender>
+   <signal>triggered()</signal>
+   <receiver>imageProcessor</receiver>
+   <slot>apply_sharpen()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>545</x>
+     <y>569</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>equalization</sender>
+   <signal>triggered()</signal>
+   <receiver>imageProcessor</receiver>
+   <slot>apply_equalization()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>545</x>
+     <y>569</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>gaussianBlur</sender>
+   <signal>triggered()</signal>
+   <receiver>imageProcessor</receiver>
+   <slot>apply_gaussian()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>545</x>
+     <y>569</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>trainClassifier</sender>
+   <signal>triggered()</signal>
+   <receiver>imageProcessor</receiver>
+   <slot>train_classifiers()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>-1</x>

@@ -1,14 +1,13 @@
 # This Python file uses the following encoding: utf-8
-from PyQt6.QtWidgets import QWidget, QHBoxLayout, QFileDialog, QLabel
+from PyQt6.QtWidgets import QWidget, QHBoxLayout, QFileDialog, QLabel, QDialog
 from PyQt6.QtCore import Qt, pyqtSignal as Signal
 
 import tempfile
+import os
 
 import cv2
 
-import os
-
-from widgets.image.image_histogram import ImageHistogram
+import utils.image_processor_utils as ImageProcessingUtils
 
 TMP_FOLDER_NAME = "image_processor/"
 TMP_IMAGE_FILE_NAME = "tmp"
@@ -26,6 +25,7 @@ class ImageProcessor(QWidget):
         self.__image_cache            = []
         self.__last_image_path        = ""
         self.__training_images_folder = ""
+        self.__image_file_extension   = ""
         self.__folder_path            = os.path.join(tempfile.gettempdir(),TMP_FOLDER_NAME)
 
         if(not os.path.exists(self.__folder_path)):
@@ -57,25 +57,30 @@ class ImageProcessor(QWidget):
     def open_image(self,file):
         self.file_opened.emit(file)
 
-        image_file_extension = file.split(".")[1]
+        self.__image_file_extension = file.split(".")[1]
+        self.__image                = cv2.imread(file)
 
-        self.__image           = cv2.imread(file)
-        self.__last_image_path = self.generate_image_file_path(image_file_extension)
+        self.set_image()
+
+    def generate_image_file_path(self):
+        image_cache_length = len(self.__image_cache)
         self.__image_cache.append(self.__last_image_path)
+        return self.__folder_path + TMP_IMAGE_FILE_NAME + str(image_cache_length) + "." + self.__image_file_extension
+
+    def set_image(self):
+        self.__last_image_path = self.generate_image_file_path()
 
         cv2.imwrite(self.__last_image_path,self.__image)
 
         self.new_image.emit(self.__last_image_path)
 
-
-    def generate_image_file_path(self,file_extension):
-        image_cache_length = len(self.__image_cache)
-        return self.__folder_path + TMP_IMAGE_FILE_NAME + str(image_cache_length) + "." + file_extension
-
     #@Slot
     def save_image(self):
 
         file = QFileDialog.getSaveFileName(self, "Save File As", os.path.expanduser('~'),filter="JPG(*.jpg);;PNG(*.png)")[0]
+
+        if not file:
+            return
 
         cv2.imwrite(file,self.__image)
 
@@ -85,15 +90,22 @@ class ImageProcessor(QWidget):
 
     #@Slot
     def apply_sharpen(self):
-        pass
+        self.__image = ImageProcessingUtils.sharpen(self.__image)
+        self.set_image()
 
     #@Slot
     def apply_gaussian(self):
-        pass
+        self.__image = ImageProcessingUtils.gaussian_blur(self.__image)
+        self.set_image()
 
     #@Slot
     def apply_brightness_and_contrast(self):
-        pass
+        print("brightness and constrast de corno")
+
+    #@Slot
+    def apply_equalization(self):
+        self.__image = ImageProcessingUtils.equalization(self.__image)
+        self.set_image()
 
     """
     # Training images
@@ -103,8 +115,17 @@ class ImageProcessor(QWidget):
     def open_training_images_folder(self):
 
         file = QFileDialog.getExistingDirectory(self, "Open training images folder",
-                                                os.path.expanduser('~'))
+                                                os.path.expanduser('~'))                                
 
         self.__training_images_folder = file
+
+
+    #@Slot
+    def train_classifiers(self):
+
+        dlg = QDialog(self)
+        dlg.setWindowTitle("Train classifiers")
+        dlg.resize(630, 300)
+        dlg.exec()
 
 
