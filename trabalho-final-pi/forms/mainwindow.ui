@@ -279,6 +279,7 @@ border-radius: 20px;</string>
    <extends>QLabel</extends>
    <header>widgets/image/image_displayer.h</header>
    <slots>
+    <signal>image_dragged(QString)</signal>
     <slot>set_image(QString)</slot>
    </slots>
   </customwidget>
@@ -317,6 +318,8 @@ border-radius: 20px;</string>
     <signal>new_image(QString)</signal>
     <signal>file_opened(QString)</signal>
     <slot>load_image_from_system()</slot>
+    <slot>open_image(QString)</slot>
+    <slot>save_image()</slot>
    </slots>
   </customwidget>
  </customwidgets>
@@ -414,6 +417,38 @@ border-radius: 20px;</string>
     </hint>
     <hint type="destinationlabel">
      <x>160</x>
+     <y>569</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>imageLabel</sender>
+   <signal>image_dragged(QString)</signal>
+   <receiver>imageProcessor</receiver>
+   <slot>open_image(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>160</x>
+     <y>569</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>545</x>
+     <y>569</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>saveFile</sender>
+   <signal>triggered()</signal>
+   <receiver>imageProcessor</receiver>
+   <slot>save_image()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>545</x>
      <y>569</y>
     </hint>
    </hints>

@@ -1,6 +1,7 @@
 # This Python file uses the following encoding: utf-8
 from PyQt6.QtWidgets import QLabel
 from PyQt6.QtGui import QPixmap
+from PyQt6.QtCore import pyqtSignal as Signal
 
 import os
 
@@ -17,6 +18,9 @@ HIGHLIGHTED_STYLESHEET = """background-color: rgb(28, 25, 32);
                          border-radius: 20px;""";
 
 class ImageDisplayer(QLabel):
+
+    # Custom Signals
+    image_dragged = Signal(str)
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -54,7 +58,7 @@ class ImageDisplayer(QLabel):
     def dropEvent(self, event):
         if event.mimeData().hasImage:
             file_path = event.mimeData().urls()[0].toLocalFile()
-            self.set_image(file_path)
+            self.image_dragged.emit(file_path)
             self.setStyleSheet(DEFAULT_STYLESHEET)
             event.accept()
         else:

@@ -40,22 +40,33 @@ class ImageProcessor(QWidget):
 
         #Read image from system
         file = QFileDialog.getOpenFileName(self,
-            str("Open Image"), os.path.expanduser('~'), str("Image Files (*.png *.jpg)"))
+            str("Open Image"), os.path.expanduser('~'), str("Image Files (*.png *.jpg)"))[0]
 
-        if not all(file):
+        if not file:
             return
 
-        self.file_opened.emit(file[0])
+        self.open_image(file)
 
-        image_file_extension = file[0].split(".")[1]
+    #@Slot
+    def open_image(self,file):
+        self.file_opened.emit(file)
 
-        self.__image           = cv2.imread(file[0])
+        image_file_extension = file.split(".")[1]
+
+        self.__image           = cv2.imread(file)
         self.__last_image_path = self.generate_image_file_path(image_file_extension)
         self.__image_cache.append(self.__last_image_path)
 
         cv2.imwrite(self.__last_image_path,self.__image)
 
         self.new_image.emit(self.__last_image_path)
+
+    #@Slot
+    def save_image(self):
+
+        file = QFileDialog.getSaveFileName(self, "Save File As", os.path.expanduser('~'),str("Image Files (*.png *.jpg)"))[0]
+
+        cv2.imwrite(file,self.__image)
 
 
     def generate_image_file_path(self,file_extension):

@@ -27,7 +27,9 @@ class ImageHistogram(QWidget):
 
         self.remove_children()
 
-        self.layout.addWidget(NavigationToolbar(static_canvas, self))
+        navigationToolbar = NavigationToolbar(static_canvas, self)
+
+        self.layout.addWidget(navigationToolbar)
         self.layout.addWidget(static_canvas)
 
         self._static_ax = static_canvas.figure.subplots()
