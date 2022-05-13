@@ -22,10 +22,11 @@ class ImageProcessor(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
 
-        self.__image           = []
-        self.__image_cache     = []
-        self.__last_image_path = ""
-        self.__folder_path     = os.path.join(tempfile.gettempdir(),TMP_FOLDER_NAME)
+        self.__image                  = []
+        self.__image_cache            = []
+        self.__last_image_path        = ""
+        self.__training_images_folder = ""
+        self.__folder_path            = os.path.join(tempfile.gettempdir(),TMP_FOLDER_NAME)
 
         if(not os.path.exists(self.__folder_path)):
             os.mkdir(self.__folder_path)
@@ -35,6 +36,11 @@ class ImageProcessor(QWidget):
                     os.unlink(os.path.join(root, f))
                 for d in dirs:
                     shutil.rmtree(os.path.join(root, d))
+
+    """
+    # Open/Save images
+    """
+
     #@Slot
     def load_image_from_system(self):
 
@@ -61,20 +67,44 @@ class ImageProcessor(QWidget):
 
         self.new_image.emit(self.__last_image_path)
 
-    #@Slot
-    def save_image(self):
-
-        file = QFileDialog.getSaveFileName(self, "Save File As", os.path.expanduser('~'),str("Image Files (*.png *.jpg)"))[0]
-
-        cv2.imwrite(file,self.__image)
-
 
     def generate_image_file_path(self,file_extension):
         image_cache_length = len(self.__image_cache)
         return self.__folder_path + TMP_IMAGE_FILE_NAME + str(image_cache_length) + "." + file_extension
 
     #@Slot
-    def make_sharpen(self):
-        result = ImageProcessorUtils.sharpen(self.image,10,3)
+    def save_image(self):
+
+        file = QFileDialog.getSaveFileName(self, "Save File As", os.path.expanduser('~'),filter="JPG(*.jpg);;PNG(*.png)")[0]
+
+        cv2.imwrite(file,self.__image)
+
+    """
+    # Filters
+    """
+
+    #@Slot
+    def apply_sharpen(self):
+        pass
+
+    #@Slot
+    def apply_gaussian(self):
+        pass
+
+    #@Slot
+    def apply_brightness_and_contrast(self):
+        pass
+
+    """
+    # Training images
+    """
+
+    #@Slot
+    def open_training_images_folder(self):
+
+        file = QFileDialog.getExistingDirectory(self, "Open training images folder",
+                                                os.path.expanduser('~'))
+
+        self.__training_images_folder = file
 
 
