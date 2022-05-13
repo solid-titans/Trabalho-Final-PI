@@ -7,6 +7,7 @@
     "widgets/image/image_histogram.py",
     "widgets/image/image_coocurrence.py",
     "widgets/image/image_processor.py",
-    "widgets/status_bar/my_status_bar.py"
+    "widgets/status_bar/my_status_bar.py",
+    "utils/image_processor_utils.py"
         ]
 }
