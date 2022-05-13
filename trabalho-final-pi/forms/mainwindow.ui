@@ -18,7 +18,7 @@
 color: rgb(255, 255, 255);
 selection-color: rgb(94, 92, 100);</string>
   </property>
-  <widget class="QWidget" name="centralwidget">
+  <widget class="ImageProcessor" name="imageProcessor">
    <property name="styleSheet">
     <string notr="true">background-color: rgb(36, 31, 49);</string>
    </property>
@@ -84,7 +84,7 @@ border-radius: 20px;</string>
          </size>
         </property>
         <property name="currentIndex">
-         <number>1</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="imageHistogram">
          <attribute name="title">
@@ -282,10 +282,6 @@ border-radius: 20px;</string>
    <class>ImageDisplayer</class>
    <extends>QLabel</extends>
    <header>widgets/image/image_displayer.h</header>
-   <slots>
-    <signal>new_image(QString)</signal>
-    <slot>load_image_from_system()</slot>
-   </slots>
   </customwidget>
   <customwidget>
    <class>ImageHistogram</class>
@@ -313,13 +309,24 @@ border-radius: 20px;</string>
     <slot>plot_image(QString)</slot>
    </slots>
   </customwidget>
+  <customwidget>
+   <class>ImageProcessor</class>
+   <extends>QWidget</extends>
+   <header>widgets/image/image_processor.h</header>
+   <container>1</container>
+   <slots>
+    <signal>new_image(QString)</signal>
+    <signal>file_opened(QString)</signal>
+    <slot>load_image_from_system()</slot>
+   </slots>
+  </customwidget>
  </customwidgets>
  <resources/>
  <connections>
   <connection>
    <sender>openFile</sender>
    <signal>triggered()</signal>
-   <receiver>imageLabel</receiver>
+   <receiver>imageProcessor</receiver>
    <slot>load_image_from_system()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -327,7 +334,7 @@ border-radius: 20px;</string>
      <y>-1</y>
     </hint>
     <hint type="destinationlabel">
-     <x>160</x>
+     <x>545</x>
      <y>569</y>
     </hint>
    </hints>
@@ -349,13 +356,13 @@ border-radius: 20px;</string>
    </hints>
   </connection>
   <connection>
-   <sender>imageLabel</sender>
+   <sender>imageProcessor</sender>
    <signal>new_image(QString)</signal>
    <receiver>histogramData</receiver>
    <slot>plot_image(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>160</x>
+     <x>545</x>
      <y>569</y>
     </hint>
     <hint type="destinationlabel">
@@ -365,13 +372,13 @@ border-radius: 20px;</string>
    </hints>
   </connection>
   <connection>
-   <sender>imageLabel</sender>
-   <signal>new_image(QString)</signal>
+   <sender>imageProcessor</sender>
+   <signal>file_opened(QString)</signal>
    <receiver>statusbar</receiver>
    <slot>new_image_loaded(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>160</x>
+     <x>545</x>
      <y>569</y>
     </hint>
     <hint type="destinationlabel">
@@ -381,13 +388,13 @@ border-radius: 20px;</string>
    </hints>
   </connection>
   <connection>
-   <sender>imageLabel</sender>
+   <sender>imageProcessor</sender>
    <signal>new_image(QString)</signal>
    <receiver>coocurrenceData</receiver>
    <slot>plot_image(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>160</x>
+     <x>545</x>
      <y>569</y>
     </hint>
     <hint type="destinationlabel">

@@ -3,8 +3,8 @@ from PyQt6.QtWidgets import QStatusBar
 
 class MyStatusBar(QStatusBar):
 
-    def __init__(self,*args,**kwargs):
-        QStatusBar.__init__(self,*args,**kwargs)
+    def __init__(self, parent=None):
+        super().__init__(parent)
 
     def new_image_loaded(self,file_path):
         self.showMessage('file opened: ' + str(file_path), msecs = 2500)
