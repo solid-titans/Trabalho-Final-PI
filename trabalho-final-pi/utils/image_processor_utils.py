@@ -1,15 +1,15 @@
-# This Python file uses the following encoding: utf-8
+import numpy as np
 import cv2 as cv
+from matplotlib import pyplot as plt
 
-def sharpen(image,parameters=0):
+
+def sharpen(image, parameters=0):
     pass
 
-def brightness_and_contrast(image,parameters):
-    pass
 
+def gaussian_blur(image, ksize=(3, 3), border=cv.BORDER_DEFAULT):
+    return cv.GaussianBlur(image, ksize, border)
 
-def gaussian_blur(image,ksize =(3,3),border = cv.BORDER_DEFAULT):
-    return cv.GaussianBlur(image,ksize,border)
 
 def equalization(image):
     R, G, B = cv.split(img)
@@ -19,14 +19,15 @@ def equalization(image):
     output1_B = cv.equalizeHist(B)
     return cv.merge((output1_R, output1_G, output1_B))
 
-def select_image_area(image,xi,yi,xf,yf):
+
+def select_image_area(image, xi, yi, xf, yf):
     pass
 
 
-if __name__ == "__main__":
-    img = cv.imread('../assets/imgs/imagem1.jpg')
-    cv.imshow('Original', img)
+if __name__ == '__main__':
 
-    cv.imshow('Equalization', equalization(img))
+	original = cv.imread("../assets/imgs/imagem1.jpg")
 
-    cv.waitKey(0)
+
+cv.waitKey(0)
+
