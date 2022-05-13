@@ -7,4 +7,4 @@ class MyStatusBar(QStatusBar):
         super().__init__(parent)
 
     def new_image_loaded(self,file_path):
-        self.showMessage('file opened: ' + str(file_path), msecs = 2500)
+        self.showMessage('file opened: ' + str(file_path), msecs = 3500)

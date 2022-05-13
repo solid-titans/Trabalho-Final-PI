@@ -21,6 +21,9 @@ class MainWindow(QMainWindow):
         path = os.fspath(Path(__file__).resolve().parent / "forms/mainwindow.ui")
         uic.loadUi(path,self)
 
+        if not self.centralWidget() and hasattr(self, 'imageProcessor'):
+                    self.setCentralWidget(self.imageProcessor)
+
 if __name__ == "__main__":
 
     qt_app = QApplication(sys.argv)

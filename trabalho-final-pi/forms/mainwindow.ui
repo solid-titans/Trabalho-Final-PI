@@ -22,104 +22,100 @@ selection-color: rgb(94, 92, 100);</string>
    <property name="styleSheet">
     <string notr="true">background-color: rgb(36, 31, 49);</string>
    </property>
-   <layout class="QVBoxLayout" name="verticalLayout">
+   <layout class="QHBoxLayout" name="horizontalLayout">
     <item>
-     <layout class="QHBoxLayout" name="mainLayout">
-      <item>
-       <widget class="ImageDisplayer" name="imageLabel">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-          <horstretch>50</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>0</height>
-         </size>
-        </property>
-        <property name="autoFillBackground">
-         <bool>false</bool>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">background-color: rgb(28, 25, 32);
+     <widget class="ImageDisplayer" name="imageLabel">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+        <horstretch>50</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="autoFillBackground">
+       <bool>false</bool>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(28, 25, 32);
 border-color: rgb(255,255,255);
 border-style: solid;
 border-width: 2px; 
 border-radius: 20px;</string>
-        </property>
-        <property name="frameShape">
-         <enum>QFrame::Box</enum>
-        </property>
-        <property name="lineWidth">
-         <number>0</number>
-        </property>
-        <property name="text">
-         <string>Please Insert an image...</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::Box</enum>
+      </property>
+      <property name="lineWidth">
+       <number>0</number>
+      </property>
+      <property name="text">
+       <string>Please Insert an image...</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QTabWidget" name="imageInformation">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>764</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>764</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="imageHistogram">
+       <attribute name="title">
+        <string>Histogram</string>
+       </attribute>
+       <layout class="QHBoxLayout" name="horizontalLayout_4">
+        <item>
+         <widget class="ImageHistogram" name="histogramData" native="true"/>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="imageCocorrency">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <attribute name="title">
+        <string>Co-occurrence</string>
+       </attribute>
+       <widget class="ImageCoocurrence" name="coocurrenceData" native="true">
+        <property name="geometry">
+         <rect>
+          <x>9</x>
+          <y>9</y>
+          <width>331</width>
+          <height>181</height>
+         </rect>
         </property>
        </widget>
-      </item>
-      <item>
-       <widget class="QTabWidget" name="imageInformation">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>764</width>
-          <height>0</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>764</width>
-          <height>16777215</height>
-         </size>
-        </property>
-        <property name="currentIndex">
-         <number>0</number>
-        </property>
-        <widget class="QWidget" name="imageHistogram">
-         <attribute name="title">
-          <string>Histogram</string>
-         </attribute>
-         <layout class="QHBoxLayout" name="horizontalLayout_4">
-          <item>
-           <widget class="ImageHistogram" name="histogramData" native="true"/>
-          </item>
-         </layout>
-        </widget>
-        <widget class="QWidget" name="imageCocorrency">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <attribute name="title">
-          <string>Co-occurrence</string>
-         </attribute>
-         <widget class="ImageCoocurrence" name="coocurrenceData" native="true">
-          <property name="geometry">
-           <rect>
-            <x>9</x>
-            <y>9</y>
-            <width>331</width>
-            <height>181</height>
-           </rect>
-          </property>
-         </widget>
-        </widget>
-       </widget>
-      </item>
-     </layout>
+      </widget>
+     </widget>
     </item>
    </layout>
   </widget>
@@ -282,6 +278,9 @@ border-radius: 20px;</string>
    <class>ImageDisplayer</class>
    <extends>QLabel</extends>
    <header>widgets/image/image_displayer.h</header>
+   <slots>
+    <slot>set_image(QString)</slot>
+   </slots>
   </customwidget>
   <customwidget>
    <class>ImageHistogram</class>
@@ -400,6 +399,22 @@ border-radius: 20px;</string>
     <hint type="destinationlabel">
      <x>493</x>
      <y>202</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>imageProcessor</sender>
+   <signal>new_image(QString)</signal>
+   <receiver>imageLabel</receiver>
+   <slot>set_image(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>545</x>
+     <y>569</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>160</x>
+     <y>569</y>
     </hint>
    </hints>
   </connection>

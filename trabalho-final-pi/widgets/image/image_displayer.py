@@ -21,8 +21,6 @@ class ImageDisplayer(QLabel):
     def __init__(self, parent=None):
         super().__init__(parent)
 
-        print(self)
-
         self.setAcceptDrops(True)
         self.setStyleSheet(DEFAULT_STYLESHEET)
 
