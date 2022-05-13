@@ -8,8 +8,9 @@ from matplotlib.figure import Figure
 from skimage import io
 
 class ImageHistogram(QWidget):
-    def __init__(self,*args,**kwargs):
-        QWidget.__init__(self,*args,**kwargs)
+    def __init__(self, parent=None):
+        super().__init__(parent)
+
         self.layout = QVBoxLayout()
         self.setLayout(self.layout)
 
