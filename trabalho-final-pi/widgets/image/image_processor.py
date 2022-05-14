@@ -1,9 +1,10 @@
 # This Python file uses the following encoding: utf-8
-from PyQt6.QtWidgets import QWidget, QHBoxLayout, QFileDialog, QLabel, QDialog
+from PyQt6.QtWidgets import QWidget, QHBoxLayout, QFileDialog, QLabel, QDialog, QMessageBox
 from PyQt6.QtCore import Qt, pyqtSignal as Signal
 
 import tempfile
 import os
+import numpy as np
 
 import cv2
 
@@ -116,7 +117,17 @@ class ImageProcessor(QWidget):
     def open_training_images_folder(self):
 
         file = QFileDialog.getExistingDirectory(self, "Open training images folder",
-                                                os.path.expanduser('~'))                                
+                                                os.path.expanduser('~'))
+
+        if not np.array_equal(OsUtils.folders_in(file),['4','3','1','2']):
+            msg = QMessageBox()
+
+            msg.setIcon(QMessageBox.Icon.Critical)
+            msg.setText("Error on loading training images folder!")
+            msg.setInformativeText("Please choose a folder which has folders named \'1\',\'2\',\'3\',\'4\'")
+            msg.setWindowTitle("Error!")
+
+            msg.exec()
 
         self.__training_images_folder = file
 

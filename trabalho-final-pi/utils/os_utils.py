@@ -1,6 +1,10 @@
 # This Python file uses the following encoding: utf-8
+import os
 
 def folders_in(path_to_parent):
-    for file_name in os.listdir(path_to_parent):
-        if os.path.isdir(os.path.join(path_to_parent,file_name)):
-            yield os.path.join(path_to_parent,file_name)
+    folders = [ f.path for f in os.scandir(path_to_parent) if f.is_dir() ]
+    result = []
+    for f in folders:
+        result.append(f.split(os.sep)[-1])
+
+    return result
