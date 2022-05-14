@@ -8,6 +8,7 @@ import os
 import cv2
 
 import utils.image_processor_utils as ImageProcessingUtils
+import utils.os_utils as OsUtils
 
 TMP_FOLDER_NAME = "image_processor/"
 TMP_IMAGE_FILE_NAME = "tmp"
