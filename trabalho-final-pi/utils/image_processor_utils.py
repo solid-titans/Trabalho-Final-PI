@@ -4,6 +4,7 @@ from matplotlib import pyplot as plt
 
 SHARPEN_3X3 = [[-1,-1,-1], [-1,9,-1], [-1,-1,-1]]
 SHARPEN_5X5 = [[0,0,-1,0,0],[0,-1,-2,-1,0],[-1,-2,16,-2,-1],[0,-1,-2,-1,0],[0,0,-1,0,0]]
+
 def sharpen(image, stype=SHARPEN_3X3):
     kernel = np.array(stype)
     return cv.filter2D(image, -1, kernel)
@@ -22,7 +23,7 @@ def equalization(image):
 
 
 def select_image_area(image, xi, yi, xf, yf):
-    pass
+    return image[xi:xf,yi:yf]
 
 
 if __name__ == '__main__':
@@ -30,11 +31,12 @@ if __name__ == '__main__':
     original = cv.imread("../assets/imgs/imagem1.jpg")
     cv.imshow('Original', original)  
 
-    sh3x3 = sharpen(original)
-    cv.imshow('3x3', sh3x3) 
 
-    sh5x5 = sharpen(original,stype=SHARPEN_5X5)
-    cv.imshow('5x5', sh5x5)   
+    cropped_image = original[80:280, 150:330]
+    cv.imshow('cropped_image', cropped_image)  
+
+    simag = select_image_area(original, 80, 150, 280, 330)
+    cv.imshow('cropped_', simag)  
 
 cv.waitKey(0)
 
