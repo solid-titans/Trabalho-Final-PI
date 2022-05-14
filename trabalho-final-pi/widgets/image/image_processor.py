@@ -109,6 +109,11 @@ class ImageProcessor(QWidget):
         self.__image = ImageProcessingUtils.equalization(self.__image)
         self.set_image()
 
+    #@Slot
+    def apply_quantization(self):
+        self.__image = ImageProcessingUtils.quantization(self.__image,6)
+        self.set_image()
+
     """
     # Training images
     """

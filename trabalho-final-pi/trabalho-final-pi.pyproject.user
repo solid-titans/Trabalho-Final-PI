@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 7.0.0, 2022-05-13T23:13:39. -->
+<!-- Written by QtCreator 7.0.0, 2022-05-13T23:34:35. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -137,6 +137,7 @@
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">/home/guaruda/HD1/code/Trabalho-Final-PI/trabalho-final-pi/widgets/image/image_coocurrence.py</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">PythonEditor.RunConfiguration./home/guaruda/HD1/code/Trabalho-Final-PI/trabalho-final-pi/widgets/image/image_coocurrence.py</value>
     <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/guaruda/HD1/code/Trabalho-Final-PI/trabalho-final-pi/widgets/image/image_coocurrence.py</value>
+    <value type="QString" key="PythonEditor.RunConfiguation.Interpreter">{4e5f81dd-a2fc-4498-bc5d-ddd21005176e}</value>
     <value type="QString" key="PythonEditor.RunConfiguation.Script">/home/guaruda/HD1/code/Trabalho-Final-PI/trabalho-final-pi/widgets/image/image_coocurrence.py</value>
     <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
@@ -154,6 +155,7 @@
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">/home/guaruda/HD1/code/Trabalho-Final-PI/trabalho-final-pi/widgets/image/image_histogram.py</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">PythonEditor.RunConfiguration./home/guaruda/HD1/code/Trabalho-Final-PI/trabalho-final-pi/widgets/image/image_histogram.py</value>
     <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/guaruda/HD1/code/Trabalho-Final-PI/trabalho-final-pi/widgets/image/image_histogram.py</value>
+    <value type="QString" key="PythonEditor.RunConfiguation.Interpreter">{46341f5d-46e2-4874-a2c3-7df7c67bf4c3}</value>
     <value type="QString" key="PythonEditor.RunConfiguation.Script">/home/guaruda/HD1/code/Trabalho-Final-PI/trabalho-final-pi/widgets/image/image_histogram.py</value>
     <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
@@ -171,6 +173,7 @@
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">/home/guaruda/HD1/code/Trabalho-Final-PI/trabalho-final-pi/utils/image_processor_utils.py</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">PythonEditor.RunConfiguration./home/guaruda/HD1/code/Trabalho-Final-PI/trabalho-final-pi/utils/image_processor_utils.py</value>
     <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/guaruda/HD1/code/Trabalho-Final-PI/trabalho-final-pi/utils/image_processor_utils.py</value>
+    <value type="QString" key="PythonEditor.RunConfiguation.Interpreter">{99f31965-5e97-4ec2-98ff-41947a5a559c}</value>
     <value type="QString" key="PythonEditor.RunConfiguation.Script">/home/guaruda/HD1/code/Trabalho-Final-PI/trabalho-final-pi/utils/image_processor_utils.py</value>
     <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
@@ -188,6 +191,7 @@
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">/home/guaruda/HD1/code/Trabalho-Final-PI/trabalho-final-pi/utils/os_utils.py</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">PythonEditor.RunConfiguration./home/guaruda/HD1/code/Trabalho-Final-PI/trabalho-final-pi/utils/os_utils.py</value>
     <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/guaruda/HD1/code/Trabalho-Final-PI/trabalho-final-pi/utils/os_utils.py</value>
+    <value type="QString" key="PythonEditor.RunConfiguation.Interpreter">{f7991d23-48b9-483f-a778-16ac977a32f3}</value>
     <value type="QString" key="PythonEditor.RunConfiguation.Script">/home/guaruda/HD1/code/Trabalho-Final-PI/trabalho-final-pi/utils/os_utils.py</value>
     <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
@@ -205,6 +209,7 @@
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">/home/guaruda/HD1/code/Trabalho-Final-PI/trabalho-final-pi/widgets/image/image_displayer.py</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">PythonEditor.RunConfiguration./home/guaruda/HD1/code/Trabalho-Final-PI/trabalho-final-pi/widgets/image/image_displayer.py</value>
     <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/guaruda/HD1/code/Trabalho-Final-PI/trabalho-final-pi/widgets/image/image_displayer.py</value>
+    <value type="QString" key="PythonEditor.RunConfiguation.Interpreter">{2d9ed6f9-d37f-40cc-9c7d-bb18eca0ba00}</value>
     <value type="QString" key="PythonEditor.RunConfiguation.Script">/home/guaruda/HD1/code/Trabalho-Final-PI/trabalho-final-pi/widgets/image/image_displayer.py</value>
     <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
@@ -222,6 +227,7 @@
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">/home/guaruda/HD1/code/Trabalho-Final-PI/trabalho-final-pi/widgets/image/image_processor.py</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">PythonEditor.RunConfiguration./home/guaruda/HD1/code/Trabalho-Final-PI/trabalho-final-pi/widgets/image/image_processor.py</value>
     <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/guaruda/HD1/code/Trabalho-Final-PI/trabalho-final-pi/widgets/image/image_processor.py</value>
+    <value type="QString" key="PythonEditor.RunConfiguation.Interpreter">{106927f2-03b7-4486-8090-1d274df96890}</value>
     <value type="QString" key="PythonEditor.RunConfiguation.Script">/home/guaruda/HD1/code/Trabalho-Final-PI/trabalho-final-pi/widgets/image/image_processor.py</value>
     <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
@@ -239,6 +245,7 @@
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">/home/guaruda/HD1/code/Trabalho-Final-PI/trabalho-final-pi/widgets/status_bar/my_status_bar.py</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">PythonEditor.RunConfiguration./home/guaruda/HD1/code/Trabalho-Final-PI/trabalho-final-pi/widgets/status_bar/my_status_bar.py</value>
     <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/guaruda/HD1/code/Trabalho-Final-PI/trabalho-final-pi/widgets/status_bar/my_status_bar.py</value>
+    <value type="QString" key="PythonEditor.RunConfiguation.Interpreter">{fd670a02-13a0-45c4-8aad-3ecda06d7fd8}</value>
     <value type="QString" key="PythonEditor.RunConfiguation.Script">/home/guaruda/HD1/code/Trabalho-Final-PI/trabalho-final-pi/widgets/status_bar/my_status_bar.py</value>
     <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
