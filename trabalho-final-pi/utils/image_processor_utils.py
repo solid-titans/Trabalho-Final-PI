@@ -26,17 +26,53 @@ def select_image_area(image, xi, yi, xf, yf):
     return image[xi:xf,yi:yf]
 
 
+def brightness_contrast(img, brightness=255,
+			contrast=127):
+
+	brightness = int((brightness - 0) * (255 - (-255)) / (510 - 0) + (-255) )
+
+	contrast   = int((contrast - 0) * (127 - (-127)) / (254 - 0) + (-127))
+
+	if brightness != 0:
+
+		if brightness > 0:
+
+			shadow = brightness
+
+			max = 255
+
+		else:
+
+			shadow = 0
+			max = 255 + brightness
+
+		al_pha = (max - shadow) / 255
+		ga_mma = shadow
+
+		cal = cv.addWeighted(img, al_pha,
+							img, 0, ga_mma)
+
+	else:
+		cal = img
+
+	if contrast != 0:
+		Alpha = float(131 * (contrast + 127)) / (127 * (131 - contrast))
+		Gamma = 127 * (1 - Alpha)
+
+		# The function addWeighted calculates
+		# the weighted sum of two arrays
+		cal = cv.addWeighted(cal, Alpha,
+							cal, 0, Gamma)
+	return cal
+
+
 if __name__ == '__main__':
 
     original = cv.imread("../assets/imgs/imagem1.jpg")
     cv.imshow('Original', original)  
 
-
-    cropped_image = original[80:280, 150:330]
-    cv.imshow('cropped_image', cropped_image)  
-
-    simag = select_image_area(original, 80, 150, 280, 330)
-    cv.imshow('cropped_', simag)  
+    simag = brightness_contrast(original,brightness=250)
+    cv.imshow('brightness_contrast', simag)  
 
 cv.waitKey(0)
 

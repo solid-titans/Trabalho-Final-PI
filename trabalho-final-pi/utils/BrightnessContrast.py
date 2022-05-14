@@ -5,11 +5,11 @@ def BrightnessContrast(brightness=0):
 	# getTrackbarPos returns the current
 	# position of the specified trackbar.
 	brightness = cv.getTrackbarPos('Brightness',
-									'Controller')
+									'Controls')
 	
 	contrast   = cv.getTrackbarPos('Contrast',
-								'Controller')
-
+								'Controls')
+ 
 	effect     = controller(img, brightness,
 						contrast)
 
@@ -69,21 +69,15 @@ if __name__ == '__main__':
 	# The function namedWindow creates a
 	# window that can be used as a placeholder
 	# for images.
-	cv.namedWindow('Controller')
+	cv.namedWindow('Controls',cv.WINDOW_NORMAL)
+	cv.resizeWindow("Controls",320,90)
 
-	# The function imshow displays an
-	# image in the specified window.
-	##cv.imshow('GEEK')
-
-	# createTrackbar(trackbarName,
-	# windowName, value, count, onChange)
-	# Brightness range -255 to 255
 	cv.createTrackbar('Brightness',
-					'Controller', 255, 2 * 255,
+					'Controls', 255, 2 * 255,
 					BrightnessContrast)
 	
 	# Contrast range -127 to 127
-	cv.createTrackbar('Contrast', 'Controller',
+	cv.createTrackbar('Contrast', 'Controls',
 					127, 2 * 127,
 					BrightnessContrast)
 
