@@ -146,3 +146,5 @@ class ImageProcessor(QWidget):
         dlg.exec()
 
 
+
+
