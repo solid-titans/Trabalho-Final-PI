@@ -2,6 +2,7 @@
 import os
 import shutil
 import tempfile
+import glob
 
 def folders_in(path_to_parent):
     folders = [ f.path for f in os.scandir(path_to_parent) if f.is_dir() ]
@@ -11,11 +12,19 @@ def folders_in(path_to_parent):
 
     return result
 
+def folders_in_with_prefix(path_to_parent):
+    folders = [ f.path for f in os.scandir(path_to_parent) if f.is_dir() ]
+
+    return folders
+
 def get_user_home():
     return os.path.expanduser('~')
 
 def get_os_tmp_path():
     return tempfile.gettempdir()
+
+def get_images_from_path(path):
+    return glob.glob(path+'*png') + glob.glob(path+'*jpg')
 
 def create_folder(folder_path):
 

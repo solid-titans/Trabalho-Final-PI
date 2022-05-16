@@ -17,6 +17,8 @@ def sharpen(image, stype=SHARPEN_3X3):
 def gaussian_blur(image, ksize=(15, 15), border=cv.BORDER_DEFAULT):
     return cv.GaussianBlur(image, ksize, border)
 
+def median_blur(image,ksize=1):
+    return cv.medianBlur(image,ksize)
 
 def equalization(image):
     R, G, B = cv.split(image)
@@ -26,10 +28,8 @@ def equalization(image):
     output1_B = cv.equalizeHist(B)
     return cv.merge((output1_R, output1_G, output1_B))
 
-
 def select_image_area(image, xi, yi, xf, yf):
     return image[xi:xf, yi:yf]
-
 
 def quantization(image, k):
 
@@ -42,7 +42,6 @@ def quantization(image, k):
     final_img = final_img.reshape(image.shape)
 
     return final_img
-
 
 def brightness_contrast(img, brightness=255,
 			contrast=127):
@@ -93,5 +92,10 @@ if __name__ == '__main__':
     simag = brightness_contrast(original,brightness=250)
     cv.imshow('brightness_contrast', simag)  
 
-cv.waitKey(0)
+if __name__ == '__main__':
+    image = cv.imread('../assets/imagem1.jpg')
+
+    image = median_blur(image,ksize=3)
+
+    cv.imshow(image)
 
