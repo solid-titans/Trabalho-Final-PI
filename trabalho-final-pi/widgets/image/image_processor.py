@@ -1,9 +1,6 @@
 # This Python file uses the following encoding: utf-8
 from PyQt6.QtWidgets import QWidget, QHBoxLayout, QFileDialog, QLabel, QDialog, QMessageBox
 from PyQt6.QtCore import Qt, pyqtSignal as Signal
-
-import tempfile
-import os
 import numpy as np
 
 import cv2
@@ -28,16 +25,9 @@ class ImageProcessor(QWidget):
         self.__last_image_path        = ""
         self.__training_images_folder = ""
         self.__image_file_extension   = ""
-        self.__folder_path            = os.path.join(tempfile.gettempdir(),TMP_FOLDER_NAME)
+        self.__folder_path            = OsUtils.join_paths(OsUtils.get_os_tmp_path,TMP_FOLDER_NAME)
 
-        if(not os.path.exists(self.__folder_path)):
-            os.mkdir(self.__folder_path)
-        else:
-            for root, dirs, files in os.walk(self.__folder_path):
-                for f in files:
-                    os.unlink(os.path.join(root, f))
-                for d in dirs:
-                    shutil.rmtree(os.path.join(root, d))
+        OsUtils.create_folder(self.__folder_path)
 
     """
     # Open/Save images
@@ -48,7 +38,7 @@ class ImageProcessor(QWidget):
 
         #Read image from system
         file = QFileDialog.getOpenFileName(self,
-            str("Open Image"), os.path.expanduser('~'), str("Image Files (*.png *.jpg)"))[0]
+            str("Open Image"), OsUtils.get_user_home(), filter="JPG(*.jpg);;PNG(*.png)")[0]
 
         if not file:
             return
@@ -79,7 +69,7 @@ class ImageProcessor(QWidget):
     #@Slot
     def save_image(self):
 
-        file = QFileDialog.getSaveFileName(self, "Save File As", os.path.expanduser('~'),filter="JPG(*.jpg);;PNG(*.png)")[0]
+        file = QFileDialog.getSaveFileName(self, "Save File As", OsUtils.get_user_home(),filter="JPG(*.jpg);;PNG(*.png)")[0]
 
         if not file:
             return
@@ -122,7 +112,7 @@ class ImageProcessor(QWidget):
     def open_training_images_folder(self):
 
         file = QFileDialog.getExistingDirectory(self, "Open training images folder",
-                                                os.path.expanduser('~'))
+                                                OsUtils.get_user_home())
 
         if not np.array_equal(OsUtils.folders_in(file),['4','3','1','2']):
             msg = QMessageBox()
