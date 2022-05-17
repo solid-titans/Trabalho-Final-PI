@@ -25,7 +25,7 @@ class ImageProcessor(QWidget):
         self.__last_image_path        = ""
         self.__training_images_folder = ""
         self.__image_file_extension   = ""
-        self.__folder_path            = OsUtils.join_paths(OsUtils.get_os_tmp_path,TMP_FOLDER_NAME)
+        self.__folder_path            = OsUtils.join_paths(OsUtils.get_os_tmp_path(),TMP_FOLDER_NAME)
 
         OsUtils.create_folder(self.__folder_path)
 

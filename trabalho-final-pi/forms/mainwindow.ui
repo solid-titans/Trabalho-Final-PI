@@ -295,7 +295,7 @@ border-radius: 20px;</string>
   <customwidget>
    <class>ImageDisplayer</class>
    <extends>QLabel</extends>
-   <header>widgets/image/image_displayer.h</header>
+   <header>widgets/image_show/image_displayer.h</header>
    <slots>
     <signal>image_dragged(QString)</signal>
     <slot>set_image(QString)</slot>
@@ -304,7 +304,7 @@ border-radius: 20px;</string>
   <customwidget>
    <class>ImageHistogram</class>
    <extends>QWidget</extends>
-   <header>widgets/image/image_histogram.h</header>
+   <header>widgets/image_plot/image_histogram.h</header>
    <container>1</container>
    <slots>
     <slot>plot_image(QString)</slot>
@@ -321,7 +321,7 @@ border-radius: 20px;</string>
   <customwidget>
    <class>ImageCoocurrence</class>
    <extends>QWidget</extends>
-   <header>widgets/image/image_coocurrence.h</header>
+   <header>widgets/image_plot/image_coocurrence.h</header>
    <container>1</container>
    <slots>
     <slot>plot_image(QString)</slot>
@@ -330,7 +330,7 @@ border-radius: 20px;</string>
   <customwidget>
    <class>ImageProcessor</class>
    <extends>QWidget</extends>
-   <header>widgets/image/image_processor.h</header>
+   <header>widgets/image_processor.h</header>
    <container>1</container>
    <slots>
     <signal>new_image(QString)</signal>

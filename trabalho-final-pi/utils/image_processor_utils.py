@@ -1,6 +1,6 @@
 import numpy as np
 import cv2 as cv
-from matplotlib import pyplot as plt
+from sklearn.cluster import MiniBatchKMeans
 
 MAX_PIXEL_VALUE = 255
 
@@ -20,6 +20,9 @@ def gaussian_blur(image, ksize=(15, 15), border=cv.BORDER_DEFAULT):
 def median_blur(image,ksize=1):
     return cv.medianBlur(image,ksize)
 
+def convert_to_grayscale(image):
+    return cv.cvtColor(image,cv.COLOR_BGR2GRAY)
+
 def equalization(image):
     R, G, B = cv.split(image)
 
@@ -33,15 +36,14 @@ def select_image_area(image, xi, yi, xf, yf):
 
 def quantization(image, k):
 
-    i = np.float32(image).reshape(-1, 3)
-    condition = (cv.TERM_CRITERIA_EPS + cv.TERM_CRITERIA_MAX_ITER, 20, 1.0)
-    ret, label, center = cv.kmeans(
-        i, k, None, condition, 10, cv.KMEANS_RANDOM_CENTERS)
-    center = np.uint8(center)
-    final_img = center[label.flatten()]
-    final_img = final_img.reshape(image.shape)
+    gray = cv.cvtColor(image, cv.COLOR_BGR2GRAY)
+    gray = gray.astype(np.float32)/255
 
-    return final_img
+    # quantize and convert back to range 0 to 255 as 8-bits
+    result = 255*np.floor(gray*k+0.5)/k
+    result = result.clip(0,31).astype(np.uint8)
+
+    return result
 
 def brightness_contrast(img, brightness=255,
 			contrast=127):
@@ -83,7 +85,7 @@ def brightness_contrast(img, brightness=255,
 
     return cal
 
-
+"""
 if __name__ == '__main__':
 
     original = cv.imread("../assets/imgs/imagem1.jpg")
@@ -91,11 +93,13 @@ if __name__ == '__main__':
 
     simag = brightness_contrast(original,brightness=250)
     cv.imshow('brightness_contrast', simag)  
-
+"""
 if __name__ == '__main__':
-    image = cv.imread('../assets/imagem1.jpg')
+    image = cv.imread('../assets/imgs/imagem1.jpg')
 
-    image = median_blur(image,ksize=3)
+    image = quantization(image,32)
 
-    cv.imshow(image)
+    cv.imshow('image',image)
+
+    cv.waitKey(0) 
 
