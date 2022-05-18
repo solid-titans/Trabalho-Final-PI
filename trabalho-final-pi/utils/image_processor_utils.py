@@ -13,10 +13,6 @@ def sharpen(image, stype=SHARPEN_3X3):
     kernel = np.array(stype)
     return cv.filter2D(image, -1, kernel)
 
-
-def gaussian_blur(image, ksize=(15, 15), border=cv.BORDER_DEFAULT):
-    return cv.blur(image, ksize, border)
-
 def median_blur(image,ksize=1):
     return cv.medianBlur(image,ksize)
 

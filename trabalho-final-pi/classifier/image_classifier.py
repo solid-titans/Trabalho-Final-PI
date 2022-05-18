@@ -106,11 +106,14 @@ class ImageClassifier():
 
         characteristics = []
 
-        glcm = graycomatrix(image, 
+        print(image)
+        data = np.array((image / 8), 'int')
+        glcm = graycomatrix(data, 
                             [1,2,4,8,16],
                             [0, np.pi / 2, np.pi / 4, np.pi / 8, 3 * np.pi / 4, 5 * np.pi / 8, 7 * np.pi/8],
                             symmetric=False, 
-                            normed=True)
+                            normed=True,
+                            levels=32)
 
         characteristics.append(shannon_entropy(glcm,base=2))
         characteristics.append(graycoprops(glcm,"energy"))
@@ -140,7 +143,8 @@ class ImageClassifier():
 
         #image = ImageProcessorUtils.quantization(image,32)
         #image = ImageProcessorUtils.equalization(image)
-        image = ImageProcessorUtils.median_blur(image,3)
+        image = ImageProcessorUtils.median_blur(image,5)
+        image = ImageProcessorUtils.sharpen(image)
 
         processing_time.stop()
 
