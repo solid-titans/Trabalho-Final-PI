@@ -106,7 +106,6 @@ class ImageClassifier():
 
         characteristics = []
 
-        print(image)
         data = np.array((image / 8), 'int')
         glcm = graycomatrix(data, 
                             [1,2,4,8,16],
@@ -156,7 +155,7 @@ if __name__ == "__main__":
 
     classifier.train_classifier("../assets/training-images")
 
-    image = imread("../assets/training-images/4/p_g_left_cc(12).png", as_gray=True)
+    image = imread("../assets/training-images/2/p_e_left_cc(12).png", as_gray=True)
 
     birad = classifier.predict_birad_from_image(image)
 
