@@ -15,7 +15,7 @@ def sharpen(image, stype=SHARPEN_3X3):
 
 
 def gaussian_blur(image, ksize=(15, 15), border=cv.BORDER_DEFAULT):
-    return cv.GaussianBlur(image, ksize, border)
+    return cv.blur(image, ksize, border)
 
 def median_blur(image,ksize=1):
     return cv.medianBlur(image,ksize)
@@ -41,59 +41,13 @@ def quantization(image, k):
 
     # quantize and convert back to range 0 to 255 as 8-bits
     result = 255*np.floor(gray*k+0.5)/k
-    result = result.clip(0,31).astype(np.uint8)
+    result = result.clip(0,255).astype(np.uint8)
 
     return result
 
-def brightness_contrast(img, brightness=255,
-			contrast=127):
+def brightness_and_contrast(image,alpha,beta):
+    return cv.convertScaleAbs(image, alpha=alpha, beta=beta)
 
-    brightness = int((brightness - 0) * (255 - (-255)) / (510 - 0) + (-255))
-
-    contrast = int((contrast - 0) * (127 - (-127)) / (254 - 0) + (-127))
-
-    cal = 0
-
-    if brightness != 0:
-
-        if brightness > 0:
-
-            shadow = brightness
-            max = 255
-
-        else:
-
-            shadow = 0
-            max = 255 + brightness
-
-        al_pha = (max - shadow) / 255
-        ga_mma = shadow
-
-        cal = cv.addWeighted(img, al_pha,img, 0, ga_mma)
-
-    else:
-        cal = img
-
-        if contrast != 0:
-
-            Alpha = float(131 * (contrast + 127)) / (127 * (131 - contrast))
-            Gamma = 127 * (1 - Alpha)
-
-            # The function addWeighted calculates
-            # the weighted sum of two arrays
-            cal = cv.addWeighted(cal, Alpha,cal, 0, Gamma)
-
-    return cal
-
-"""
-if __name__ == '__main__':
-
-    original = cv.imread("../assets/imgs/imagem1.jpg")
-    cv.imshow('Original', original)  
-
-    simag = brightness_contrast(original,brightness=250)
-    cv.imshow('brightness_contrast', simag)  
-"""
 if __name__ == '__main__':
     image = cv.imread('../assets/imgs/imagem1.jpg')
 

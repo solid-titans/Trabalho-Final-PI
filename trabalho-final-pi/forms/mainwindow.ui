@@ -171,7 +171,7 @@ border-radius: 20px;</string>
      <addaction name="equalization"/>
      <addaction name="sharpen"/>
      <addaction name="brightnessContrast"/>
-     <addaction name="gaussianBlur"/>
+     <addaction name="medianBlur"/>
     </widget>
     <addaction name="menuFilters"/>
     <addaction name="quantization"/>
@@ -280,9 +280,9 @@ border-radius: 20px;</string>
     <string>Train classifier</string>
    </property>
   </action>
-  <action name="gaussianBlur">
+  <action name="medianBlur">
    <property name="text">
-    <string>Gaussian Blur</string>
+    <string>Median Blur</string>
    </property>
   </action>
   <action name="quantization">
@@ -543,7 +543,7 @@ border-radius: 20px;</string>
    </hints>
   </connection>
   <connection>
-   <sender>gaussianBlur</sender>
+   <sender>medianBlur</sender>
    <signal>triggered()</signal>
    <receiver>imageProcessor</receiver>
    <slot>apply_gaussian()</slot>

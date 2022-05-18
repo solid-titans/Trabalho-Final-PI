@@ -1,5 +1,5 @@
 # This Python file uses the following encoding: utf-8
-from PyQt6.QtWidgets import QWidget, QHBoxLayout, QFileDialog, QLabel, QDialog, QMessageBox
+from PyQt6.QtWidgets import QWidget, QHBoxLayout, QFileDialog, QLabel, QDialog, QMessageBox, QMainWindow
 from PyQt6.QtCore import Qt, pyqtSignal as Signal
 import numpy as np
 
@@ -7,6 +7,9 @@ import cv2
 
 import utils.image_processor_utils as ImageProcessingUtils
 import utils.os_utils as OsUtils
+
+from widgets.image_edit.brightness_contrast_editor import BrightnessContrastEditor
+from widgets.image_edit.median_blur_editor import MedianBlurEditor
 
 TMP_FOLDER_NAME     = "image_processor/"
 TMP_IMAGE_FILE_NAME = "tmp"
@@ -80,6 +83,10 @@ class ImageProcessor(QWidget):
     # Filters
     """
 
+    def save_filtered_image(self,image):
+        self.__image = image
+        self.set_image()
+
     #@Slot
     def apply_sharpen(self):
         self.__image = ImageProcessingUtils.sharpen(self.__image)
@@ -87,12 +94,18 @@ class ImageProcessor(QWidget):
 
     #@Slot
     def apply_gaussian(self):
-        self.__image = ImageProcessingUtils.gaussian_blur(self.__image)
-        self.set_image()
+        ui = MedianBlurEditor(self)
+        ui.set_image_saving_function(self.save_filtered_image)
+        ui.loadImage(self.__last_image_path)
+        ui.exec()
 
     #@Slot
     def apply_brightness_and_contrast(self):
-        print("brightness and constrast de corno")
+
+        ui = BrightnessContrastEditor(self)
+        ui.set_image_saving_function(self.save_filtered_image)
+        ui.loadImage(self.__last_image_path)
+        ui.exec()
 
     #@Slot
     def apply_equalization(self):

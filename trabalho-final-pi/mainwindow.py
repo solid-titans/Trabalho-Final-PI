@@ -22,7 +22,7 @@ class MainWindow(QMainWindow):
         uic.loadUi(path,self)
 
         if not self.centralWidget() and hasattr(self, 'imageProcessor'):
-                    self.setCentralWidget(self.imageProcessor)
+            self.setCentralWidget(self.imageProcessor)
 
 if __name__ == "__main__":
 
