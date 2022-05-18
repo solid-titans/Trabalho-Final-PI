@@ -5,13 +5,16 @@
     "widgets/image_show/image_displayer.py",
     "forms/mainwindow.ui",
     "widgets/image_plot/image_histogram.py",
-    "widgets/image_plot/image_coocurrence.py",
+    "widgets/image_plot/image_confusion_matrix.py",
     "widgets/image_processor.py",
     "widgets/status_bar/my_status_bar.py",
     "widgets/image_edit/brightness_contrast_editor.py",
+    "widgets/image_edit/quantization_editor.py",
     "widgets/image_edit/median_blur_editor.py",
+    "widgets/training_qdialog/training_setup.py",
     "utils/image_processor_utils.py",
     "utils/os_utils.py",
+    "utils/stopwatch.py",
     "classifier/image_classifier.py"
         ]
 }

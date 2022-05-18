@@ -10,8 +10,8 @@ class Stopwatch():
         return "{:.2f}".format(self.__end - self.__start)
 
     def start(self):
-        self.__start = Time.time()
+        self.__start = Time.perf_counter()
 
     def stop(self) -> str:
-        self.__end = Time.time()
+        self.__end = Time.perf_counter()
         

@@ -82,7 +82,7 @@ border-radius: 20px;</string>
        </size>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="imageHistogram">
        <attribute name="title">
@@ -102,18 +102,13 @@ border-radius: 20px;</string>
         </sizepolicy>
        </property>
        <attribute name="title">
-        <string>Co-occurrence</string>
+        <string>Confusion Matrix</string>
        </attribute>
-       <widget class="ImageCoocurrence" name="coocurrenceData" native="true">
-        <property name="geometry">
-         <rect>
-          <x>9</x>
-          <y>9</y>
-          <width>331</width>
-          <height>181</height>
-         </rect>
-        </property>
-       </widget>
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <item>
+         <widget class="ImageConfusionMatrix" name="confusionMatrix" native="true"/>
+        </item>
+       </layout>
       </widget>
      </widget>
     </item>
@@ -143,6 +138,7 @@ border-radius: 20px;</string>
     </property>
     <addaction name="selectDataset"/>
     <addaction name="trainClassifier"/>
+    <addaction name="predictBIRADS"/>
    </widget>
    <widget class="QMenu" name="menuEdit">
     <property name="title">
@@ -290,6 +286,11 @@ border-radius: 20px;</string>
     <string>Quantization</string>
    </property>
   </action>
+  <action name="predictBIRADS">
+   <property name="text">
+    <string>Predict BI-RADS</string>
+   </property>
+  </action>
  </widget>
  <customwidgets>
   <customwidget>
@@ -319,12 +320,12 @@ border-radius: 20px;</string>
    </slots>
   </customwidget>
   <customwidget>
-   <class>ImageCoocurrence</class>
+   <class>ImageConfusionMatrix</class>
    <extends>QWidget</extends>
-   <header>widgets/image_plot/image_coocurrence.h</header>
+   <header>widgets/image_plot/image_confusion_matrix.h</header>
    <container>1</container>
    <slots>
-    <slot>plot_image(QString)</slot>
+    <slot>plot_confusion_matrix(QString)</slot>
    </slots>
   </customwidget>
   <customwidget>
@@ -335,6 +336,7 @@ border-radius: 20px;</string>
    <slots>
     <signal>new_image(QString)</signal>
     <signal>file_opened(QString)</signal>
+    <signal>training_finished(QString)</signal>
     <slot>load_image_from_system()</slot>
     <slot>open_image(QString)</slot>
     <slot>save_image()</slot>
@@ -343,8 +345,9 @@ border-radius: 20px;</string>
     <slot>apply_gaussian()</slot>
     <slot>apply_brightness_and_contrast()</slot>
     <slot>apply_equalization()</slot>
-    <slot>train_classifiers()</slot>
+    <slot>setup_training()</slot>
     <slot>apply_quantization()</slot>
+    <slot>predict_birads()</slot>
    </slots>
   </customwidget>
  </customwidgets>
@@ -384,22 +387,6 @@ border-radius: 20px;</string>
   </connection>
   <connection>
    <sender>imageProcessor</sender>
-   <signal>new_image(QString)</signal>
-   <receiver>histogramData</receiver>
-   <slot>plot_image(QString)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>545</x>
-     <y>569</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>698</x>
-     <y>583</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>imageProcessor</sender>
    <signal>file_opened(QString)</signal>
    <receiver>statusbar</receiver>
    <slot>new_image_loaded(QString)</slot>
@@ -411,22 +398,6 @@ border-radius: 20px;</string>
     <hint type="destinationlabel">
      <x>545</x>
      <y>1088</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>imageProcessor</sender>
-   <signal>new_image(QString)</signal>
-   <receiver>coocurrenceData</receiver>
-   <slot>plot_image(QString)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>545</x>
-     <y>569</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>493</x>
-     <y>202</y>
     </hint>
    </hints>
   </connection>
@@ -562,7 +533,7 @@ border-radius: 20px;</string>
    <sender>trainClassifier</sender>
    <signal>triggered()</signal>
    <receiver>imageProcessor</receiver>
-   <slot>train_classifiers()</slot>
+   <slot>setup_training()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>-1</x>
@@ -579,6 +550,54 @@ border-radius: 20px;</string>
    <signal>triggered()</signal>
    <receiver>imageProcessor</receiver>
    <slot>apply_quantization()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>545</x>
+     <y>569</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>imageProcessor</sender>
+   <signal>new_image(QString)</signal>
+   <receiver>histogramData</receiver>
+   <slot>plot_image(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>545</x>
+     <y>569</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>698</x>
+     <y>583</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>imageProcessor</sender>
+   <signal>training_finished(QString)</signal>
+   <receiver>confusionMatrix</receiver>
+   <slot>plot_confusion_matrix(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>545</x>
+     <y>569</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>495</x>
+     <y>200</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>predictBIRADS</sender>
+   <signal>triggered()</signal>
+   <receiver>imageProcessor</receiver>
+   <slot>predict_birads()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>-1</x>

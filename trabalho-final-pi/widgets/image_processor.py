@@ -1,15 +1,21 @@
 # This Python file uses the following encoding: utf-8
-from PyQt6.QtWidgets import QWidget, QHBoxLayout, QFileDialog, QLabel, QDialog, QMessageBox, QMainWindow
-from PyQt6.QtCore import Qt, pyqtSignal as Signal
+from PyQt6.QtWidgets import QWidget, QFileDialog, QMessageBox
+from PyQt6.QtCore import pyqtSignal as Signal
 import numpy as np
 
 import cv2
+
+from skimage.io import imread
 
 import utils.image_processor_utils as ImageProcessingUtils
 import utils.os_utils as OsUtils
 
 from widgets.image_edit.brightness_contrast_editor import BrightnessContrastEditor
 from widgets.image_edit.median_blur_editor import MedianBlurEditor
+from widgets.image_edit.quantization_editor import QuantizationEditor
+from widgets.training_qdialog.training_setup import TrainingSetup
+
+from classifier.image_classifier import ImageClassifier
 
 TMP_FOLDER_NAME     = "image_processor/"
 TMP_IMAGE_FILE_NAME = "tmp"
@@ -17,8 +23,9 @@ TMP_IMAGE_FILE_NAME = "tmp"
 class ImageProcessor(QWidget):
 
     # Custom Signals
-    new_image   = Signal(str)
-    file_opened = Signal(str)
+    new_image         = Signal(str)
+    file_opened       = Signal(str)
+    training_finished = Signal(str)
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -29,6 +36,8 @@ class ImageProcessor(QWidget):
         self.__training_images_folder = ""
         self.__image_file_extension   = ""
         self.__folder_path            = OsUtils.join_paths(OsUtils.get_os_tmp_path(),TMP_FOLDER_NAME)
+
+        self.__image_classifier = ImageClassifier()
 
         OsUtils.create_folder(self.__folder_path)
 
@@ -72,6 +81,17 @@ class ImageProcessor(QWidget):
     #@Slot
     def save_image(self):
 
+        if not self.__image:
+            msg = QMessageBox()
+
+            msg.setIcon(QMessageBox.Icon.Critical)
+            msg.setText("Error")
+            msg.setInformativeText("Image not loaded")
+            msg.setWindowTitle("Error!")
+
+            msg.exec()
+            return
+
         file = QFileDialog.getSaveFileName(self, "Save File As", OsUtils.get_user_home(),filter="JPG(*.jpg);;PNG(*.png)")[0]
 
         if not file:
@@ -89,11 +109,35 @@ class ImageProcessor(QWidget):
 
     #@Slot
     def apply_sharpen(self):
+
+        if not self.__image:
+            msg = QMessageBox()
+
+            msg.setIcon(QMessageBox.Icon.Critical)
+            msg.setText("Error")
+            msg.setInformativeText("Image not loaded")
+            msg.setWindowTitle("Error!")
+
+            msg.exec()
+            return
+
         self.__image = ImageProcessingUtils.sharpen(self.__image)
         self.set_image()
 
     #@Slot
     def apply_gaussian(self):
+
+        if not self.__image:
+            msg = QMessageBox()
+
+            msg.setIcon(QMessageBox.Icon.Critical)
+            msg.setText("Error")
+            msg.setInformativeText("Image not loaded")
+            msg.setWindowTitle("Error!")
+
+            msg.exec()
+            return
+
         ui = MedianBlurEditor(self)
         ui.set_image_saving_function(self.save_filtered_image)
         ui.loadImage(self.__last_image_path)
@@ -102,6 +146,17 @@ class ImageProcessor(QWidget):
     #@Slot
     def apply_brightness_and_contrast(self):
 
+        if not self.__image:
+            msg = QMessageBox()
+
+            msg.setIcon(QMessageBox.Icon.Critical)
+            msg.setText("Error")
+            msg.setInformativeText("Image not loaded")
+            msg.setWindowTitle("Error!")
+
+            msg.exec()
+            return
+
         ui = BrightnessContrastEditor(self)
         ui.set_image_saving_function(self.save_filtered_image)
         ui.loadImage(self.__last_image_path)
@@ -109,13 +164,55 @@ class ImageProcessor(QWidget):
 
     #@Slot
     def apply_equalization(self):
+
+        if not self.__image:
+            msg = QMessageBox()
+
+            msg.setIcon(QMessageBox.Icon.Critical)
+            msg.setText("Error")
+            msg.setInformativeText("Image not loaded")
+            msg.setWindowTitle("Error!")
+
+            msg.exec()
+            return
+
         self.__image = ImageProcessingUtils.equalization(self.__image)
+        self.set_image()
+
+    def set_quantization(self,value):
+
+        if not self.__image:
+            msg = QMessageBox()
+
+            msg.setIcon(QMessageBox.Icon.Critical)
+            msg.setText("Error")
+            msg.setInformativeText("Image not loaded")
+            msg.setWindowTitle("Error!")
+
+            msg.exec()
+            return
+
+        self.__image = ImageProcessingUtils.quantization(self.__image,value)
         self.set_image()
 
     #@Slot
     def apply_quantization(self):
-        self.__image = ImageProcessingUtils.quantization(self.__image,6)
-        self.set_image()
+
+        if not self.__image:
+            msg = QMessageBox()
+
+            msg.setIcon(QMessageBox.Icon.Critical)
+            msg.setText("Error")
+            msg.setInformativeText("Image not loaded")
+            msg.setWindowTitle("Error!")
+
+            msg.exec()
+            return
+
+        ui = QuantizationEditor(self)
+        ui.set_image_saving_function(self.set_quantization)
+        ui.exec()
+
 
     """
     # Training images
@@ -136,18 +233,49 @@ class ImageProcessor(QWidget):
             msg.setWindowTitle("Error!")
 
             msg.exec()
+            return
 
         self.__training_images_folder = file
 
 
     #@Slot
-    def train_classifiers(self):
+    def setup_training(self):
 
-        dlg = QDialog(self)
-        dlg.setWindowTitle("Train classifiers")
-        dlg.resize(630, 300)
-        dlg.exec()
+        ui = TrainingSetup(self)
+        ui.set_training_function(self.train_classifier)
+        ui.set_training_images_folder_path(self.__training_images_folder)
+        ui.exec()
 
+    def train_classifier(self,file_path,parameters):
+        
+        self.__image_classifier.train_classifier(file_path,parameters)
 
+        msg = QMessageBox()
+
+        msg.setText("The training is complete!")
+        msg.setInformativeText("Training accuracy " + str(self.__image_classifier.get_model_accuracy()))
+        msg.setDetailedText("Total training time: " + str(self.__image_classifier.get_times()["training"]) + "s\n"
+                            + "Processing time: " + str(self.__image_classifier.get_times()["processing"]) )
+        msg.setWindowTitle("Training")
+
+        msg.exec()
+
+        self.training_finished.emit(str(self.__image_classifier.get_confusion_matrix()))
+
+    def predict_birads(self):
+
+        if not self.__last_image_path:
+            return
+
+        birad = self.__image_classifier.predict_birad_from_image(self.__last_image_path)
+
+        msg = QMessageBox()
+
+        msg.setText("A prediction was made!")
+        msg.setInformativeText("The bi-rads of the image is: " + str(birad))
+        msg.setDetailedText("Time to predict: " + str(self.__image_classifier.get_times()["prediction"]) + "s")
+        msg.setWindowTitle("Predict BI-RADS")
+
+        msg.exec()
 
 

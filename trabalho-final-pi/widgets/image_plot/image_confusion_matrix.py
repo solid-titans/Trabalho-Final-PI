@@ -6,11 +6,9 @@ from matplotlib.backends.backend_qtagg import (
 from matplotlib.figure import Figure
 import matplotlib.pyplot as plt
 
-from skimage.feature.texture import graycomatrix, graycoprops
+import ast
 
-import cv2
-
-class ImageCoocurrence(QWidget):
+class ImageConfusionMatrix(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
 
@@ -22,18 +20,12 @@ class ImageCoocurrence(QWidget):
             self.imageInfoColumn.itemAt(i).widget().setParent(None)
 
     #@Slot
-    def plot_image(self,file_path):
+    def plot_confusion_matrix(self,confusion_matrix):
 
-        image = cv2.imread(file_path)
-        image = cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
-        """
-        glcm = graycomatrix(image, [1], [0], 256, symmetric=False, normed=True)
-
-        xs = []
-        ys = []
-
-        xs.append(graycoprops(glcm, 'dissimilarity')[0, 0])
-        ys.append(graycoprops(glcm, 'correlation')[0, 0])
+        confusion_matrix = confusion_matrix.replace(" ", ",")
+        confusion_matrix = confusion_matrix.replace(",,", ",")
+        confusion_matrix = confusion_matrix.replace("[,", "[")
+        confusion_matrix = ast.literal_eval(confusion_matrix)
 
         static_canvas = FigureCanvas(Figure(figsize=(5, 3)))
 
@@ -44,6 +36,10 @@ class ImageCoocurrence(QWidget):
 
         self._static_ax = static_canvas.figure.subplots()
 
-        self._static_ax.imshow(glcm)
-        self._static_ax.show()
-        """
+        self._static_ax.matshow(confusion_matrix, cmap=plt.cm.Oranges)
+
+        self._static_ax.set_ylabel("Actual")
+        self._static_ax.set_xlabel("Predicted")
+
+        self._static_ax.set_xticklabels(("0","1","2","3","4"))
+        self._static_ax.set_yticklabels(("0","1","2","3","4"))

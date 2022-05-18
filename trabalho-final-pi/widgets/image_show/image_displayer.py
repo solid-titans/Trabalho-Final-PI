@@ -1,9 +1,11 @@
 # This Python file uses the following encoding: utf-8
 from PyQt6.QtWidgets import QLabel
-from PyQt6.QtGui import QPixmap
+from PyQt6.QtGui import QPixmap, QImage
 from PyQt6.QtCore import pyqtSignal as Signal
 
 import os
+
+import cv2, imutils
 
 DEFAULT_STYLESHEET = """background-color: rgb(28, 25, 32);
                      border-color: rgb(255,255,255);
@@ -31,7 +33,12 @@ class ImageDisplayer(QLabel):
     #@Slot
     def set_image(self,file_path):
         self.file_path = file_path
-        super().setPixmap(QPixmap(self.file_path))
+
+        image = cv2.imread(file_path)
+        image = imutils.resize(image,width=640)
+        frame = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+        image = QImage(frame, frame.shape[1],frame.shape[0],frame.strides[0],QImage.Format.Format_RGB888)
+        super().setPixmap(QPixmap.fromImage(image))
 
     """
     Drag and drop event handling
