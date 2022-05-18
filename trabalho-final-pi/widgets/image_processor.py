@@ -25,7 +25,7 @@ class ImageProcessor(QWidget):
     # Custom Signals
     new_image         = Signal(str)
     file_opened       = Signal(str)
-    training_finished = Signal(str)
+    training_finished = Signal(str,str,str)
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -81,7 +81,7 @@ class ImageProcessor(QWidget):
     #@Slot
     def save_image(self):
 
-        if not self.__image:
+        if not self.__last_image_path:
             msg = QMessageBox()
 
             msg.setIcon(QMessageBox.Icon.Critical)
@@ -110,7 +110,7 @@ class ImageProcessor(QWidget):
     #@Slot
     def apply_sharpen(self):
 
-        if not self.__image:
+        if not self.__last_image_path:
             msg = QMessageBox()
 
             msg.setIcon(QMessageBox.Icon.Critical)
@@ -127,7 +127,7 @@ class ImageProcessor(QWidget):
     #@Slot
     def apply_gaussian(self):
 
-        if not self.__image:
+        if not self.__last_image_path:
             msg = QMessageBox()
 
             msg.setIcon(QMessageBox.Icon.Critical)
@@ -146,7 +146,7 @@ class ImageProcessor(QWidget):
     #@Slot
     def apply_brightness_and_contrast(self):
 
-        if not self.__image:
+        if not self.__last_image_path:
             msg = QMessageBox()
 
             msg.setIcon(QMessageBox.Icon.Critical)
@@ -165,7 +165,7 @@ class ImageProcessor(QWidget):
     #@Slot
     def apply_equalization(self):
 
-        if not self.__image:
+        if not self.__last_image_path:
             msg = QMessageBox()
 
             msg.setIcon(QMessageBox.Icon.Critical)
@@ -181,7 +181,7 @@ class ImageProcessor(QWidget):
 
     def set_quantization(self,value):
 
-        if not self.__image:
+        if not self.__last_image_path:
             msg = QMessageBox()
 
             msg.setIcon(QMessageBox.Icon.Critical)
@@ -198,7 +198,7 @@ class ImageProcessor(QWidget):
     #@Slot
     def apply_quantization(self):
 
-        if not self.__image:
+        if not self.__last_image_path:
             msg = QMessageBox()
 
             msg.setIcon(QMessageBox.Icon.Critical)
@@ -260,11 +260,21 @@ class ImageProcessor(QWidget):
 
         msg.exec()
 
-        self.training_finished.emit(str(self.__image_classifier.get_confusion_matrix()))
+        self.training_finished.emit(str(self.__image_classifier.get_confusion_matrix()),
+                                    str(self.__image_classifier.get_model_accuracy()),
+                                    str(self.__image_classifier.get_specificity()))
 
     def predict_birads(self):
 
         if not self.__last_image_path:
+            msg = QMessageBox()
+
+            msg.setIcon(QMessageBox.Icon.Critical)
+            msg.setText("Error")
+            msg.setInformativeText("Image not loaded")
+            msg.setWindowTitle("Error!")
+
+            msg.exec()
             return
 
         birad = self.__image_classifier.predict_birad_from_image(self.__last_image_path)

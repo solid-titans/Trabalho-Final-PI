@@ -81,7 +81,7 @@ class ImageClassifier():
 
                 for img in images:
 
-                    img = self.__apply_filters_to_image(img)
+                    #img = self.__apply_filters_to_image(img)
                     texture_descriptor = self.__extract_image_texture_descriptors(img) 
                     texture_arr.append(texture_descriptor)
                     birad_arr.append(self.__birad_classes.index(self.__birad_classes[i]))
@@ -180,20 +180,18 @@ class ImageClassifier():
         processing_time.start()
 
         if 'quantization' in self.__user_processing_parameters:
-            image = ImageProcessorUtils.quantization(image,self.__user_processing_parameters['quantization'])
+            image = ImageProcessorUtils.quantization(image,int(self.__user_processing_parameters['quantization']))
 
         if 'equalization' in self.__user_processing_parameters:
             image = ImageProcessorUtils.equalization(image)
 
         if 'median_blur' in self.__user_processing_parameters:
-            image = ImageProcessorUtils.median_blur(image,self.__user_processing_parameters['median_blur'])
+            image = ImageProcessorUtils.median_blur(image,int(self.__user_processing_parameters['median_blur']))
         
         if 'brightness_and_contrast' in self.__user_processing_parameters:
             image = ImageProcessorUtils.brightness_and_contrast(image,
-                                                                self.__user_processing_parameters['brightness'],
-                                                                self.__user_processing_parameters['contrast'])
-
-        #image = ImageProcessorUtils.sharpen(image)
+                                                                int(self.__user_processing_parameters['brightness']),
+                                                                int(self.__user_processing_parameters['contrast']))
 
         processing_time.stop()
 

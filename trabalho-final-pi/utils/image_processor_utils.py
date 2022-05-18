@@ -14,6 +14,8 @@ def sharpen(image, stype=SHARPEN_3X3):
     return cv.filter2D(image, -1, kernel)
 
 def median_blur(image,ksize=1):
+    if ksize == 0:
+        return
     return cv.medianBlur(image,ksize)
 
 def convert_to_grayscale(image):

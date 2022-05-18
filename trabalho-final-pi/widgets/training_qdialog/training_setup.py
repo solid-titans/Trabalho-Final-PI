@@ -16,7 +16,7 @@ class TrainingSetup(QDialog):
         self.equalizeImage = False 
         self.brightnessValue = 0 
         self.contrastValue = 0
-        self.quantization = 0
+        self.quantization = 2
 
         self.train= None
 
@@ -120,9 +120,9 @@ class TrainingSetup(QDialog):
         self.quantizationSlider.setObjectName("quantizationSlider")
         self.verticalLayout.addWidget(self.quantizationSlider)
 
-        self.quantizationSlider.setMinimum(1)
+        self.quantizationSlider.setMinimum(2)
         self.quantizationSlider.setMaximum(32)
-        self.quantizationSlider.setValue(1)
+        self.quantizationSlider.setValue(2)
         self.quantizationSlider.setTickInterval(1)
 
         """
@@ -198,13 +198,15 @@ class TrainingSetup(QDialog):
 
     def change_quantization(self,value):
         self.quantizationLabel.setText("Quantization: " + str(value))
-        self.quantization_value = value
+        self.quantization = value
 
     def set_contrast_value(self,value):
         self.contrastLabel.setText("Contrast: " + str(value))
         self.contrastValue = value
 
     def set_median_blur_value(self,value):
+        if value % 2 != 1:
+            return
         self.medianBlurLabel.setText("Median Blur " + str(value))
         self.medianBlurValue = value
 

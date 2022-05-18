@@ -24,8 +24,8 @@ class MedianBlurEditor(QDialog):
 
     def loadUi(self):
         self.setObjectName("MainWindow")
-        self.resize(750, 510)
-        self.setFixedSize(750, 510)
+        self.resize(750, 600)
+        self.setFixedSize(750, 600)
 
         self.centralwidget = QtWidgets.QWidget(self)
         self.centralwidget.setObjectName("centralwidget")
@@ -89,7 +89,7 @@ class MedianBlurEditor(QDialog):
 
     def setPhoto(self,image):
         self.tempImage = image
-        image = imutils.resize(image,width=640)
+        image = imutils.resize(image,width=500)
         frame = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
         image = QImage(frame, frame.shape[1],frame.shape[0],frame.strides[0],QImage.Format.Format_RGB888)
         self.label.setPixmap(QtGui.QPixmap.fromImage(image))

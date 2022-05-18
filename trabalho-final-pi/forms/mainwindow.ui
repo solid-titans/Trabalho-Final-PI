@@ -140,20 +140,6 @@ border-radius: 20px;</string>
     <addaction name="trainClassifier"/>
     <addaction name="predictBIRADS"/>
    </widget>
-   <widget class="QMenu" name="menuEdit">
-    <property name="title">
-     <string>Edit</string>
-    </property>
-    <widget class="QMenu" name="menuRegion">
-     <property name="title">
-      <string>Region</string>
-     </property>
-     <addaction name="selectRegion"/>
-     <addaction name="undoSelection"/>
-     <addaction name="redoSelection"/>
-    </widget>
-    <addaction name="menuRegion"/>
-   </widget>
    <widget class="QMenu" name="menuImage">
     <property name="title">
      <string>Image</string>
@@ -165,7 +151,6 @@ border-radius: 20px;</string>
      <addaction name="separator"/>
      <addaction name="separator"/>
      <addaction name="equalization"/>
-     <addaction name="sharpen"/>
      <addaction name="brightnessContrast"/>
      <addaction name="medianBlur"/>
     </widget>
@@ -173,7 +158,6 @@ border-radius: 20px;</string>
     <addaction name="quantization"/>
    </widget>
    <addaction name="menuFile"/>
-   <addaction name="menuEdit"/>
    <addaction name="menuImage"/>
    <addaction name="menuTrain"/>
   </widget>
@@ -190,9 +174,6 @@ border-radius: 20px;</string>
    </attribute>
    <addaction name="openFile"/>
    <addaction name="saveFile"/>
-   <addaction name="selectRegion"/>
-   <addaction name="undoSelection"/>
-   <addaction name="redoSelection"/>
   </widget>
   <action name="openFile">
    <property name="icon">
@@ -325,7 +306,7 @@ border-radius: 20px;</string>
    <header>widgets/image_plot/image_confusion_matrix.h</header>
    <container>1</container>
    <slots>
-    <slot>plot_confusion_matrix(QString)</slot>
+    <slot>plot_confusion_matrix(QString,QString,QString)</slot>
    </slots>
   </customwidget>
   <customwidget>
@@ -336,7 +317,7 @@ border-radius: 20px;</string>
    <slots>
     <signal>new_image(QString)</signal>
     <signal>file_opened(QString)</signal>
-    <signal>training_finished(QString)</signal>
+    <signal>training_finished(QString,QString,QString)</signal>
     <slot>load_image_from_system()</slot>
     <slot>open_image(QString)</slot>
     <slot>save_image()</slot>
@@ -579,9 +560,9 @@ border-radius: 20px;</string>
   </connection>
   <connection>
    <sender>imageProcessor</sender>
-   <signal>training_finished(QString)</signal>
+   <signal>training_finished(QString,QString,QString)</signal>
    <receiver>confusionMatrix</receiver>
-   <slot>plot_confusion_matrix(QString)</slot>
+   <slot>plot_confusion_matrix(QString,QString,QString)</slot>
    <hints>
     <hint type="sourcelabel">
      <x>545</x>
