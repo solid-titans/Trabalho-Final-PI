@@ -23,6 +23,12 @@ def get_user_home():
 def get_os_tmp_path():
     return tempfile.gettempdir()
 
+def get_os_seperator():
+    return os.sep
+
+def exists(path_to_file):
+    return os.path.exists(path_to_file)
+
 def get_images_from_path(path):
     return glob.glob(path+'/*png') + glob.glob(path+'/*jpg')
 

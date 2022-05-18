@@ -22,13 +22,16 @@ from skimage.measure import shannon_entropy
 
 from skimage.io import imread
 
+CHARACTERISTICS_CACHE_FILE_NAME = "classifier_chache.pkl"
+
 class ImageClassifier():
 
     def __init__(self) -> None:
         self.__classifier       = svm.SVC(probability=True)
         self.__model            = None
         self.__model_param_grid = {'C':[0.1,1,10,100],'gamma':[0.0001,0.001,0.1,1],'kernel':['rbf','poly']}
-        self.__birad_classes    = None
+        self.__birad_classes    = ['1','2','3','4']
+        self.__cache_path       = OsUtils.get_os_tmp_path() + OsUtils.get_os_seperator() + CHARACTERISTICS_CACHE_FILE_NAME
 
     def train_classifier(self,training_images_folder_path):
 
@@ -38,30 +41,38 @@ class ImageClassifier():
         flat_data_arr = []
         target_arr    = []
 
-        images_subfolders = OsUtils.folders_in_with_prefix(training_images_folder_path)
-        self.__birad_classes     = OsUtils.folders_in(training_images_folder_path)
+        df = None
 
-        for i in range(len(images_subfolders)):
+        if OsUtils.exists(self.__cache_path):
+            df = pd.read_pickle(self.__cache_path)
+        else:
+            flat_data_arr = []
+            target_arr    = []
 
-            images = self.__extract_images_from_folder(images_subfolders[i])
+            images_subfolders = OsUtils.folders_in_with_prefix(training_images_folder_path)
+            self.__birad_classes     = OsUtils.folders_in(training_images_folder_path)
 
-            for img in images:
+            for i in range(len(images_subfolders)):
 
-                img = self.__apply_filters_to_image(img)
-                texture_descriptor = self.__extract_image_texture_descriptors(img) 
-                flat_data_arr.append(texture_descriptor)
-                target_arr.append(self.__birad_classes.index(self.__birad_classes[i]))
+                images = self.__extract_images_from_folder(images_subfolders[i])
+
+                for img in images:
+
+                    img = self.__apply_filters_to_image(img)
+                    texture_descriptor = self.__extract_image_texture_descriptors(img) 
+                    flat_data_arr.append(texture_descriptor)
+                    target_arr.append(self.__birad_classes.index(self.__birad_classes[i]))
 
 
-        flat_data = np.array(flat_data_arr)
-        target    = np.array(target_arr)
+            flat_data = np.array(flat_data_arr)
+            target    = np.array(target_arr)
 
-        df = pd.DataFrame(flat_data)
+            df = pd.DataFrame(flat_data)
+            df['Target'] = target 
 
-        df['Target'] = target 
+            df.to_pickle(self.__cache_path)
 
         x = df.iloc[:,:-1]
-
         y = df.iloc[:,-1]   
 
         self.__model = GridSearchCV(self.__classifier,self.__model_param_grid)
@@ -106,13 +117,11 @@ class ImageClassifier():
 
         characteristics = []
 
-        data = np.array((image / 8), 'int')
-        glcm = graycomatrix(data, 
+        glcm = graycomatrix(image, 
                             [1,2,4,8,16],
                             [0, np.pi / 2, np.pi / 4, np.pi / 8, 3 * np.pi / 4, 5 * np.pi / 8, 7 * np.pi/8],
                             symmetric=False, 
-                            normed=True,
-                            levels=32)
+                            normed=True)
 
         characteristics.append(shannon_entropy(glcm,base=2))
         characteristics.append(graycoprops(glcm,"energy"))
