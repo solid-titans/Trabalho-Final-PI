@@ -224,7 +224,7 @@ class ImageProcessor(QWidget):
         file = QFileDialog.getExistingDirectory(self, "Open training images folder",
                                                 OsUtils.get_user_home())
 
-        if not np.array_equal(OsUtils.folders_in(file),['4','3','1','2']):
+        if not np.array_equal(OsUtils.folders_in(file),['1','2','3','4']):
             msg = QMessageBox()
 
             msg.setIcon(QMessageBox.Icon.Critical)

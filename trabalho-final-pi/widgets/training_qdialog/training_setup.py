@@ -220,7 +220,7 @@ class TrainingSetup(QDialog):
         if not file:
             return
 
-        if not np.array_equal(OsUtils.folders_in(file),['4','3','1','2']):
+        if not np.array_equal(OsUtils.folders_in(file),['1','2','3','4']):
             msg = QtWidgets.QMessageBox()
 
             msg.setIcon(QtWidgets.QMessageBox.Icon.Critical)

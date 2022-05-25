@@ -10,7 +10,7 @@ def folders_in(path_to_parent):
     for f in folders:
         result.append(f.split(os.sep)[-1])
 
-    return result
+    return sorted(result)
 
 def folders_in_with_prefix(path_to_parent):
     folders = [ f.path for f in os.scandir(path_to_parent) if f.is_dir() ]
