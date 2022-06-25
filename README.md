@@ -10,16 +10,6 @@ por tecido denso heterogêneo (III) e por tecido extremamente denso (IV). A mamo
 ferramenta de rastreio do câncer e radiologistas avaliam a densidade da mama com base na análise
 visual das imagens.
 
-<p align="center">
-  <img src="trabalho-final-pi/assets/imgs/imagem1.jpg" width="200">
-
-  <img src="trabalho-final-pi/assets/imgs/imagem2.jpg" width="200">
-
-  <img src="trabalho-final-pi/assets/imgs/imagem3.jpg" width="200">
-
-  <img src="trabalho-final-pi/assets/imgs/imagem4.jpg" width="200">
-</p>
-
 Neste trabalho, você deverá implementar um aplicativo que leia imagens de exames mamográficos e
 possibilite o reconhecimento automático da densidade da mama, utilizando técnicas de descrição por
 textura.
