@@ -14,6 +14,8 @@ Neste trabalho, você deverá implementar um aplicativo que leia imagens de exam
 possibilite o reconhecimento automático da densidade da mama, utilizando técnicas de descrição por
 textura.
 
+![Captura de tela_2023-01-23_11-38-21](https://user-images.githubusercontent.com/9157977/214067020-ce6a7535-237f-4037-ab42-796e44b9a654.png)
+
 # Especificações do programa
 
 a) O programa deve ser implementado em C, C++, Python 3.8 ou Java.
